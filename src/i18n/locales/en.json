@@ -1,0 +1,2122 @@
+{
+  "app": {
+    "name": "DiafaSol",
+    "tagline": "Tourism ERP"
+  },
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "operators": "Operators",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Sign Up"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "subtitle": "Access your secure dashboard",
+      "heroTitle": "Management Platform",
+      "heroSubtitle": "Tourism ERP",
+      "heroDescription": "Centralized management system to supervise and administer all tourism operators and partners.",
+      "emailLabel": "Email or username",
+      "emailPlaceholder": "you@domain.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "submitButton": "Sign In",
+      "submitting": "Signing in...",
+      "errorTitle": "Login Error",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "New to DiafaSol?",
+      "createAccount": "Create a free account",
+      "features": {
+        "multiCompany": "Multi-company",
+        "multiCompanyDesc": "Global operator management",
+        "centralAdmin": "Central administration",
+        "centralAdminDesc": "Complete access control",
+        "monitoring": "Real-time monitoring",
+        "monitoringDesc": "Supervision and analytics"
+      }
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Create your admin space to manage your operators",
+      "heroTitle": "Management Platform",
+      "heroSubtitle": "Tourism ERP",
+      "heroDescription": "Centralized system to administer and supervise all tourism sector companies and operators.",
+      "userInfoTitle": "Your information",
+      "companyInfoTitle": "Your organization information",
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "johndoe",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@domain.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "At least 6 characters",
+      "companyNameLabel": "Organization name",
+      "companyNamePlaceholder": "DiafaSol Management",
+      "companyEmailLabel": "Professional email",
+      "companyEmailPlaceholder": "admin@organization.com",
+      "groupTitleLabel": "Group Name",
+      "groupTitlePlaceholder": "My Hotel Group",
+      "groupTitleHelp": "Your properties will be organized under this group",
+      "optionalFields": "Additional information (optional)",
+      "logoLabel": "Logo (URL)",
+      "logoPlaceholder": "https://example.com/logo.png",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "+1 234 567 8900",
+      "websiteLabel": "Website",
+      "websitePlaceholder": "https://example.com",
+      "submitButton": "Create my account",
+      "submitting": "Creating account...",
+      "errorTitle": "Registration Error",
+      "invalidUrl": "⚠️ Invalid URL for logo or website",
+      "passwordStrength": "Strength",
+      "passwordStrengthWeak": "Weak",
+      "passwordStrengthMedium": "Medium",
+      "passwordStrengthGood": "Good",
+      "passwordStrengthStrong": "Strong",
+      "passwordStrengthVeryStrong": "Very Strong",
+      "terms": "By creating an account, you agree to our",
+      "termsLink": "Terms of Service",
+      "and": "and our",
+      "privacyLink": "Privacy Policy",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in",
+      "benefits": {
+        "quickSetup": "Quick setup",
+        "quickSetupDesc": "Immediate deployment",
+        "security": "Enhanced security",
+        "securityDesc": "Role and permission management",
+        "multiTenant": "Multi-tenant",
+        "multiTenantDesc": "Complete data isolation",
+        "support": "Technical support",
+        "supportDesc": "24/7 admin assistance"
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "subtitle": "Enter your email to receive a reset link",
+      "sendLink": "Send Reset Link",
+      "emailSent": "Email Sent!",
+      "checkEmail": "If an account exists with this email, you will receive a reset link.",
+      "backToLogin": "Back to Login",
+      "tryAgain": "Try another email address",
+      "error": "An error occurred. Please try again."
+    },
+    "resetPassword": {
+      "title": "New Password",
+      "subtitle": "Choose a new secure password",
+      "newPassword": "New Password",
+      "passwordPlaceholder": "Minimum 6 characters",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Re-enter your password",
+      "resetButton": "Reset Password",
+      "success": "Password Reset!",
+      "successMessage": "Your password has been successfully reset. You will be redirected to the login page...",
+      "goToLogin": "Go to Login",
+      "backToForgot": "Request a new link"
+    },
+    "greeting": "Hello,",
+    "defaultUser": "explorer"
+  },
+  "trust": {
+    "ssl": "SSL Secured",
+    "support": "24/7 Support"
+  },
+  "common": {
+    "required": "*",
+    "optional": "(optional)",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving...",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "viewAll": "View All",
+    "back": "Back to list",
+    "backToDashboard": "Back to Dashboard",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "create": "Create",
+    "update": "Update",
+    "updating": "Updating...",
+    "submitting": "Submitting...",
+    "property": "Property",
+    "searchProperty": "Search properties...",
+    "typeToSearch": "Type at least 2 characters to search",
+    "noResultsFound": "No results found",
+    "yes": "Yes",
+    "no": "No",
+    "none": "None",
+    "daysBefore": "days before",
+    "ranges": "ranges",
+    "page": "Page",
+    "of": "of",
+    "clear": "Clear",
+    "actions": "Actions",
+    "remove": "Remove",
+    "add": "Add",
+    "close": "Close"
+  },
+  "dashboard": {
+    "welcome": "Dashboard",
+    "company": "Company",
+    "group": "Group",
+    "propertyName": "Property Name",
+    "propertyType": "Type",
+    "city": "City",
+    "currency": "Currency",
+    "quickActions": {
+      "properties": "Properties",
+      "propertiesDescription": "Manage your properties and settings",
+      "roomTypes": "Room Types",
+      "roomTypesDescription": "Configure room types and availability",
+      "ratePlans": "Rate Plans",
+      "ratePlansDescription": "Set up pricing and rate plans"
+    },
+    "viewAll": "View All",
+    "addNew": "Add New",
+    "selectPropertyTitle": "Select a Property",
+    "selectPropertyMessage": "Please select a property from the dropdown above to view details and manage resources."
+  },
+  "context": {
+    "selectGroup": "Select Group",
+    "selectProperty": "Select Property",
+    "propertySelectorDescription": "Choose a property to work with or add a new one to this group",
+    "noGroupSelected": "No Group Selected",
+    "noGroupSelectedMessage": "Please create a group first to select properties.",
+    "addProperty": "Add Property",
+    "editProperty": "Edit Property",
+    "propertyRequired": "Property Selection Required",
+    "propertyRequiredMessage": "Please select a property to continue.",
+    "propertyDetails": "Property Details",
+    "viewDetails": "View Details",
+    "viewFullDetails": "View Full Details",
+    "propertyName": "Name",
+    "propertyType": "Type",
+    "city": "City",
+    "currency": "Currency",
+    "showDetails": "Show property details",
+    "hideDetails": "Hide property details",
+    "syncedWithChannex": "Synced with Channex",
+    "notSyncedWithChannex": "Not synced with Channex",
+    "clickToSyncChannex": "Click to sync with Channex",
+    "propertySyncedWithChannex": "Property synced with Channex - Click to update",
+    "propertyNotSyncedWithChannex": "Property not synced with Channex",
+    "clickToSyncPropertyChannex": "Click to sync property with Channex",
+    "clickToUpdatePropertyChannex": "Click to update property in Channex",
+    "taxSetDetails": "Tax Set",
+    "selectTaxSet": "Select Tax Set",
+    "selectTaxSetPlaceholder": "Select a tax set...",
+    "addTaxSet": "Add Tax Set",
+    "editTaxSet": "Edit Tax Set",
+    "taxSetTitle": "Title",
+    "taxSetCurrency": "Currency",
+    "taxSetStatus": "Status",
+    "taxSetTaxCount": "Taxes",
+    "taxSetTaxes": "Taxes",
+    "viewTaxSetDetails": "View Full Details",
+    "noTaxSetsAvailable": "No tax sets available for this property",
+    "taxSetSyncedWithChannex": "Tax set synced with Channex - Click to update",
+    "taxSetNotSyncedWithChannex": "Tax set not synced with Channex",
+    "clickToSyncTaxSetChannex": "Click to sync tax set with Channex",
+    "clickToUpdateTaxSetChannex": "Click to update tax set in Channex",
+    "manageTaxes": "Manage",
+    "moreTaxes": "more taxes",
+    "noTaxesInSet": "No taxes in this set",
+    "addTaxesToSet": "Add taxes to this set",
+    "updateGroupInChannex": "Update Group in Channex",
+    "selectRoomType": "Select Room Type",
+    "selectRoomTypePlaceholder": "Select a room type...",
+    "addRoomType": "Add Room Type",
+    "editRoomType": "Edit Room Type",
+    "roomTypeDetails": "Room Type Details",
+    "viewRoomTypeDetails": "View Full Details",
+    "roomTypeSyncedWithChannex": "Room type synced with Channex - Click to sync updates",
+    "roomTypeNotSyncedWithChannex": "Room type not synced with Channex",
+    "clickToSyncRoomTypeChannex": "Click to sync room type with Channex",
+    "selectRatePlan": "Select Rate Plan",
+    "selectRatePlanPlaceholder": "Select a rate plan...",
+    "addRatePlan": "Add Rate Plan",
+    "editRatePlan": "Edit Rate Plan",
+    "ratePlanDetails": "Rate Plan Details",
+    "viewRatePlanDetails": "View Full Details",
+    "ratePlanSyncedWithChannex": "Rate plan synced with Channex - Click to sync updates",
+    "ratePlanNotSyncedWithChannex": "Rate plan not synced with Channex",
+    "clickToSyncRatePlanChannex": "Click to sync rate plan with Channex",
+    "ratePlanMissingOptionsTitle": "Options Required",
+    "ratePlanMissingOptionsMessage": "Rate plan options are required before syncing with Channex. Please create options first.",
+    "ratePlanMissingOptionsWarning": "Cannot sync: Rate plan options are required",
+    "cannotSyncMissingOptions": "Cannot sync: Options are required",
+    "propertyMissingSettingsTitle": "Settings Required",
+    "propertyMissingSettingsMessage": "Property settings are required before syncing with Channex. Please create settings first.",
+    "propertyMissingSettingsWarning": "Cannot sync: Property settings are required",
+    "syncErrorTitle": "Sync Failed",
+    "syncErrorMessage": "Failed to sync with Channex. Please check the error details and try again."
+  },
+  "pagination": {
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "results": "results",
+    "page": "Page",
+    "previous": "Previous",
+    "next": "Next",
+    "firstPage": "First page",
+    "lastPage": "Last page"
+  },
+  "modal": {
+    "confirm": {
+      "title": "Are you sure?",
+      "message": "This action cannot be undone.",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "delete": {
+      "title": "Confirm deletion",
+      "message": "Are you sure you want to delete this item? This action is irreversible.",
+      "messageFacility": "Are you sure you want to delete the facility \"{{name}}\"? This action is irreversible.",
+      "messageProperty": "Are you sure you want to delete the property \"{{name}}\"? This action is irreversible and will also delete all associated data.",
+      "messagePropertyContent": "Are you sure you want to delete the content for \"{{name}}\"? This action is irreversible.",
+      "messagePropertyPhoto": "Are you sure you want to delete the photo for \"{{property}}\"? This action is irreversible.",
+      "messagePropertyFacility": "Are you sure you want to delete the link between \"{{property}}\" and \"{{facility}}\"? This action is irreversible.",
+      "messagePropertySettings": "Are you sure you want to delete the settings for \"{{name}}\"? This action is irreversible.",
+      "messageGroup": "Are you sure you want to delete the group \"{{name}}\"? This action is irreversible.",
+      "messageReservationAdvancePolicy": "Are you sure you want to delete the advance policy \"{{name}}\"? This action is irreversible.",
+      "messageReservationAdvancePolicyDateRange": "Are you sure you want to delete this date range? This action is irreversible.",
+      "messageReservationCancellationPolicy": "Are you sure you want to delete the cancellation policy \"{{name}}\"? This action is irreversible.",
+      "messageReservationCancellationPolicyDateRange": "Are you sure you want to delete this date range? This action is irreversible.",
+      "messageRatePlan": "Are you sure you want to delete the rate plan \"{{name}}\"? This action is irreversible.",
+      "messageTaxSet": "Are you sure you want to delete the tax set \"{{name}}\"? This action is irreversible.",
+      "messageTaxSetItem": "Are you sure you want to delete the tax item \"{{name}}\"? This action is irreversible.",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    }
+  },
+  "operators": {
+    "title": "Operators",
+    "subtitle": "Track agencies, hotels, riads and destination partners.",
+    "addOperator": "Add operator",
+    "active": "Active",
+    "operatorsCount": "{{count}} operators",
+    "completionRate": "Completion rate",
+    "lastSync": "Last sync",
+    "pending": "Waiting for API connection",
+    "whenReady": "As soon as NestJS API responds",
+    "table": {
+      "name": "Name",
+      "city": "City",
+      "email": "Email",
+      "createdAt": "Created on",
+      "noData": "—",
+      "empty": "No operators yet.",
+      "loading": "Loading operators...",
+      "error": "Unable to fetch operators."
+    }
+  },
+  "properties": {
+    "title": "Properties",
+    "subtitle": "Manage your hotels, resorts, and establishments",
+    "addProperty": "Add Property",
+    "filteredByGroup": "Filtered by group: {{groupName}}",
+    "clearFilter": "Clear Filter",
+    "tabs": {
+      "overview": "Overview",
+      "content": "Content",
+      "photos": "Photos",
+      "facilities": "Facilities",
+      "ratePlans": "Rate Plans",
+      "settings": "Settings"
+    },
+    "actions": {
+      "overview": "Overview",
+      "content": "Content",
+      "photos": "Photos",
+      "facilities": "Facilities",
+      "roomTypes": "Room Types",
+      "settings": "Settings"
+    },
+    "overview": {
+      "basicInfo": "Basic Information",
+      "quickStats": "Quick Statistics",
+      "ratePlans": "Rate Plans",
+      "photos": "Photos",
+      "facilities": "Facilities",
+      "content": "Content"
+    },
+    "stats": {
+      "propertiesCount": "properties"
+    },
+    "search": {
+      "placeholder": "Search by name, city, country..."
+    },
+    "table": {
+      "subtitle": "Complete list of properties",
+      "title": "Name",
+      "currency": "Currency",
+      "propertyType": "Type",
+      "location": "Location",
+      "contact": "Contact",
+      "website": "Website",
+      "actions": "Actions",
+      "empty": "No properties yet.",
+      "loading": "Loading properties...",
+      "error": "Unable to retrieve properties."
+    },
+    "form": {
+      "basicInfo": "Basic Information",
+      "locationInfo": "Location",
+      "coordinatesInfo": "Coordinates & Timezone",
+      "additionalInfo": "Additional Information",
+      "title": "title",
+      "titlePlaceholder": "e.g., Grand Hotel Paris",
+      "currency": "Currency",
+      "selectCurrency": "Select a currency",
+      "propertyType": "Property Type",
+      "selectPropertyType": "Select a type",
+      "email": "Email",
+      "emailPlaceholder": "hotel@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+1 234 567 8900",
+      "country": "Country",
+      "selectCountry": "Select a country",
+      "state": "State/Region",
+      "statePlaceholder": "California",
+      "city": "City",
+      "cityPlaceholder": "Los Angeles",
+      "zipCode": "Zip Code",
+      "zipCodePlaceholder": "90001",
+      "address": "Address",
+      "addressPlaceholder": "123 Main Street",
+      "longitude": "Longitude",
+      "longitudeRange": "Between -180 and 180",
+      "latitude": "Latitude",
+      "latitudeRange": "Between -90 and 90",
+      "timezone": "Timezone",
+      "selectTimezone": "Select a timezone",
+      "logoUrl": "Logo URL",
+      "website": "Website",
+      "groupId": "Group ID",
+      "groupIdHelp": "Optional UUID to group related properties",
+      "groupIdAutoSelected": "Group ID automatically selected from current context",
+      "groupName": "Group",
+      "groupOfProperty": "The group of this property is"
+    },
+    "create": {
+      "title": "New Property",
+      "subtitle": "Add a new establishment to your system"
+    },
+    "edit": {
+      "title": "Edit Property",
+      "subtitle": "Update property information",
+      "notFound": "Property not found"
+    },
+    "details": {
+      "title": "Name",
+      "currency": "Currency",
+      "propertyType": "Type",
+      "timezone": "Timezone",
+      "contactInfo": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "website": "Website",
+      "locationInfo": "Location",
+      "address": "Address",
+      "city": "City",
+      "state": "State/Region",
+      "zipCode": "Zip Code",
+      "country": "Country",
+      "coordinates": "GPS Coordinates",
+      "longitude": "Longitude",
+      "latitude": "Latitude",
+      "groupInfo": "Group",
+      "groupId": "Group ID",
+      "metadata": "Metadata",
+      "id": "ID",
+      "companyId": "Company ID",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "noLocation": "No location specified"
+    },
+    "validation": {
+      "titleRequired": "Name is required",
+      "titleTooLong": "Name cannot exceed 255 characters",
+      "currencyRequired": "Currency is required",
+      "currencyInvalid": "Currency must be a 3-character ISO code (e.g., USD, EUR)",
+      "emailInvalid": "Invalid email format",
+      "phoneTooLong": "Phone cannot exceed 50 characters",
+      "countryInvalid": "Country must be a 2-character ISO code (e.g., US, FR)",
+      "stateTooLong": "State/region cannot exceed 100 characters",
+      "cityTooLong": "City cannot exceed 100 characters",
+      "addressTooLong": "Address cannot exceed 255 characters",
+      "zipCodeTooLong": "Zip code cannot exceed 20 characters",
+      "longitudeInvalid": "Longitude must be between -180 and 180",
+      "latitudeInvalid": "Latitude must be between -90 and 90",
+      "timezoneTooLong": "Timezone cannot exceed 64 characters",
+      "propertyTypeTooLong": "Type cannot exceed 50 characters",
+      "logoUrlInvalid": "Invalid logo URL (max 255 characters)",
+      "websiteInvalid": "Invalid website URL (max 255 characters)",
+      "groupIdInvalid": "Group ID must be a valid UUID"
+    }
+  },
+  "propertyPhotos": {
+    "title": "Property Photos",
+    "subtitle": "Manage property photos and images",
+    "addPhoto": "Add Photo",
+    "stats": {
+      "photosCount": "photos"
+    },
+    "search": {
+      "placeholder": "Search by URL, description, author..."
+    },
+    "form": {
+      "selectProperty": "Select Property",
+      "property": "Property",
+      "selectPropertyPlaceholder": "Choose a property",
+      "propertyOfPhoto": "The property of this photo is",
+      "photoInfo": "Photo Information",
+      "url": "Photo URL",
+      "urlPlaceholder": "https://example.com/photo.jpg",
+      "position": "Position",
+      "positionHelp": "Display order number (optional)",
+      "kind": "Kind",
+      "selectKind": "Select a kind",
+      "author": "Author",
+      "authorPlaceholder": "Photographer name or credit",
+      "description": "Description",
+      "descriptionPlaceholder": "Photo description..."
+    },
+    "table": {
+      "subtitle": "Complete list of property photos",
+      "photo": "Photo",
+      "property": "Property",
+      "position": "Position",
+      "kind": "Kind",
+      "author": "Author",
+      "actions": "Actions",
+      "empty": "No photos yet.",
+      "loading": "Loading photos...",
+      "error": "Unable to retrieve photos."
+    },
+    "create": {
+      "title": "Add Photo",
+      "subtitle": "Add a new photo to a property"
+    },
+    "edit": {
+      "title": "Edit Photo",
+      "subtitle": "Update photo information",
+      "notFound": "Photo not found"
+    },
+    "details": {
+      "title": "Photo Details",
+      "property": "Property",
+      "position": "Position",
+      "kind": "Kind",
+      "author": "Author",
+      "description": "Description",
+      "url": "URL",
+      "metadata": "Metadata",
+      "id": "ID",
+      "propertyId": "Property ID",
+      "companyId": "Company ID",
+      "createdAt": "Created At"
+    },
+    "validation": {
+      "propertyRequired": "Property is required",
+      "urlRequired": "Photo URL is required",
+      "urlInvalid": "Invalid URL format",
+      "positionInvalid": "Position must be a positive number",
+      "authorTooLong": "Author cannot exceed 255 characters",
+      "kindTooLong": "Kind cannot exceed 50 characters"
+    }
+  },
+  "propertyFacilities": {
+    "title": "Property Facilities",
+    "subtitle": "Link facilities to properties",
+    "addLink": "Add Link",
+    "stats": {
+      "linksCount": "links"
+    },
+    "form": {
+      "title": "Link Facility to Property",
+      "property": "Property",
+      "selectProperty": "Select a property",
+      "propertyOfFacility": "The property of this facility link is",
+      "facility": "Facility",
+      "selectFacility": "Select a facility",
+      "help": "Select a property and a facility to create the link"
+    },
+    "table": {
+      "subtitle": "Complete list of property-facility links",
+      "property": "Property",
+      "facility": "Facility",
+      "facilityDescription": "Description",
+      "createdAt": "Created At",
+      "actions": "Actions",
+      "empty": "No links yet.",
+      "loading": "Loading links...",
+      "error": "Unable to retrieve links."
+    },
+    "create": {
+      "title": "Add Link",
+      "subtitle": "Link a facility to a property"
+    },
+    "validation": {
+      "propertyRequired": "Property is required",
+      "facilityRequired": "Facility is required"
+    }
+  },
+  "propertySettings": {
+    "title": "Property Settings",
+    "subtitle": "Manage property settings and business rules",
+    "addSettings": "Add Settings",
+    "stats": {
+      "settingsCount": "settings"
+    },
+    "form": {
+      "selectProperty": "Select Property",
+      "property": "Property",
+      "selectPropertyPlaceholder": "Choose a property",
+      "propertyOfSettings": "The property of these settings is",
+      "availabilitySettings": "Availability Settings",
+      "allowOnConfirmation": "Auto-update on confirmation",
+      "allowOnModification": "Auto-update on modification",
+      "allowOnCancellation": "Auto-update on cancellation",
+      "pricingSettings": "Pricing Settings",
+      "minStayType": "Minimum Stay Type",
+      "selectMinStayType": "Select a type",
+      "minPrice": "Minimum Price",
+      "maxPrice": "Maximum Price",
+      "advancedSettings": "Advanced Settings",
+      "stateLength": "State Length",
+      "cutOffTime": "Cut-off Time",
+      "cutOffTimeHelp": "Format HH:MM:SS (e.g., 14:00:00)",
+      "cutOffDays": "Cut-off Days",
+      "maxDayAdvance": "Max Day Advance"
+    },
+    "table": {
+      "subtitle": "Complete list of property settings",
+      "property": "Property",
+      "autoUpdate": "Auto Update",
+      "pricing": "Pricing",
+      "advanced": "Advanced",
+      "onConfirmation": "Confirmation",
+      "onModification": "Modification",
+      "onCancellation": "Cancellation",
+      "min": "Min",
+      "max": "Max",
+      "stayType": "Type",
+      "cutOff": "Cut-off",
+      "cutOffDays": "Days",
+      "maxAdvance": "Advance",
+      "actions": "Actions",
+      "empty": "No settings yet.",
+      "loading": "Loading settings...",
+      "error": "Unable to retrieve settings."
+    },
+    "create": {
+      "title": "Add Settings",
+      "subtitle": "Configure settings for a property"
+    },
+    "edit": {
+      "title": "Edit Settings",
+      "subtitle": "Update property settings",
+      "notFound": "Settings not found"
+    },
+    "details": {
+      "title": "Settings Details",
+      "property": "Property",
+      "availabilitySettings": "Availability Settings",
+      "allowOnConfirmation": "Auto-update on confirmation",
+      "allowOnModification": "Auto-update on modification",
+      "allowOnCancellation": "Auto-update on cancellation",
+      "pricingSettings": "Pricing Settings",
+      "minStayType": "Minimum Stay Type",
+      "minPrice": "Minimum Price",
+      "maxPrice": "Maximum Price",
+      "advancedSettings": "Advanced Settings",
+      "stateLength": "State Length",
+      "cutOffTime": "Cut-off Time",
+      "cutOffDays": "Cut-off Days",
+      "maxDayAdvance": "Max Day Advance",
+      "metadata": "Metadata",
+      "propertyId": "Property ID",
+      "companyId": "Company ID",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    },
+    "validation": {
+      "propertyRequired": "Property is required",
+      "minPriceInvalid": "Minimum price must be a positive number",
+      "maxPriceInvalid": "Maximum price must be a positive number",
+      "maxPriceLessThanMin": "Maximum price must be greater than minimum price",
+      "stateLengthInvalid": "State length must be a positive number",
+      "cutOffTimeInvalid": "Invalid format. Use HH:MM:SS (e.g., 14:00:00)",
+      "cutOffDaysInvalid": "Cut-off days must be a positive number",
+      "maxDayAdvanceInvalid": "Max day advance must be a positive number"
+    }
+  },
+  "propertyContent": {
+    "title": "Property Content",
+    "subtitle": "Manage descriptions and important information",
+    "addContent": "Add Content",
+    "stats": {
+      "contentCount": "content records"
+    },
+    "search": {
+      "placeholder": "Search in descriptions..."
+    },
+    "form": {
+      "selectProperty": "Select Property",
+      "property": "Property",
+      "selectPropertyPlaceholder": "Choose a property",
+      "propertyOfContent": "The property of this content is",
+      "contentInfo": "Content Information",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter detailed property description...",
+      "descriptionHelp": "General property description (supports HTML)",
+      "importantInfo": "Important Information",
+      "importantInfoPlaceholder": "Enter important information (rules, policies, etc.)...",
+      "importantInfoHelp": "Critical information for guests (supports HTML)"
+    },
+    "table": {
+      "subtitle": "Complete list of property content",
+      "property": "Property",
+      "description": "Description",
+      "importantInfo": "Important Info",
+      "actions": "Actions",
+      "empty": "No content records yet.",
+      "loading": "Loading content...",
+      "error": "Unable to retrieve content."
+    },
+    "create": {
+      "title": "Add Content",
+      "subtitle": "Add descriptions and information for a property"
+    },
+    "edit": {
+      "title": "Edit Content",
+      "subtitle": "Update property content",
+      "notFound": "Content not found"
+    },
+    "details": {
+      "title": "Content Details",
+      "property": "Property",
+      "description": "Description",
+      "importantInfo": "Important Information",
+      "metadata": "Metadata",
+      "propertyId": "Property ID",
+      "companyId": "Company ID",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    },
+    "validation": {
+      "propertyRequired": "Property is required",
+      "atLeastOneField": "At least one field (description or important information) must be filled"
+    }
+  },
+  "facilities": {
+    "title": "Facilities",
+    "subtitle": "Manage available amenities and services",
+    "addFacility": "Add facility",
+    "confirmDelete": "Are you sure you want to delete this facility?",
+    "stats": {
+      "total": "Total",
+      "facilitiesCount": "facilities",
+      "page": "Page",
+      "showing": "Showing",
+      "items": "items"
+    },
+    "search": {
+      "title": "Search",
+      "placeholder": "Search by name or description..."
+    },
+    "pagination": {
+      "page": "Page",
+      "of": "of"
+    },
+    "table": {
+      "subtitle": "Complete list of facilities",
+      "name": "Name",
+      "description": "Description",
+      "createdAt": "Created on",
+      "actions": "Actions",
+      "empty": "No facilities yet.",
+      "loading": "Loading facilities...",
+      "error": "Unable to fetch facilities."
+    },
+    "form": {
+      "title": "New Facility",
+      "subtitle": "Add a new facility or service",
+      "nameLabel": "Facility name",
+      "namePlaceholder": "E.g.: WiFi, Pool, Parking...",
+      "descriptionLabel": "Description (optional)",
+      "descriptionPlaceholder": "Describe the facility...",
+      "characters": "characters",
+      "submitButton": "Create facility"
+    },
+    "create": {
+      "title": "New Facility",
+      "subtitle": "Create a new facility to associate with your properties"
+    },
+    "edit": {
+      "title": "Edit Facility",
+      "subtitle": "Update facility information",
+      "notFound": "Facility not found",
+      "submitButton": "Save changes"
+    },
+    "details": {
+      "name": "Name",
+      "description": "Description",
+      "noDescription": "No description available",
+      "createdAt": "Created on",
+      "updatedAt": "Updated on",
+      "metadata": "Metadata",
+      "id": "ID",
+      "companyId": "Company ID"
+    }
+  },
+  "sidebar": {
+    "title": "Settings",
+    "subtitle": "Resource management",
+    "close": "Close"
+  },
+  "roomTypes": {
+    "title": "Room Types",
+    "subtitle": "Manage different types of rooms within your properties",
+    "filteredByProperty": "Filtered by property: {{propertyName}}",
+    "tabs": {
+      "overview": "Overview",
+      "content": "Content",
+      "photos": "Photos",
+      "facilities": "Facilities",
+      "availability": "Availability",
+      "ratePlans": "Rate Plans"
+    },
+    "actions": {
+      "overview": "Overview",
+      "content": "Content",
+      "photos": "Photos",
+      "facilities": "Facilities",
+      "availability": "Availability",
+      "ratePlans": "Rate Plans"
+    },
+    "overview": {
+      "basicInfo": "Basic Information",
+      "occupancyInfo": "Occupancy Information",
+      "quickStats": "Quick Statistics",
+      "photos": "Photos",
+      "facilities": "Facilities",
+      "availability": "Availability",
+      "content": "Content",
+      "ratePlans": "Rate Plans"
+    },
+    "detail": {
+      "subtitle": "Manage room type details and related content"
+    },
+    "stats": {
+      "roomTypesCount": "room types"
+    },
+    "search": {
+      "placeholder": "Search room types...",
+      "placeholderFiltered": "Search room types for this property..."
+    },
+    "table": {
+      "title": "Title",
+      "property": "Property",
+      "countOfRooms": "Count of rooms",
+      "occupancy": "Occupancy",
+      "roomKind": "Room Kind",
+      "capacity": "Capacity",
+      "adults": "Adults",
+      "children": "Children",
+      "infants": "Infants",
+      "default": "Default",
+      "noData": "No room types yet",
+      "noDataDescription": "Create your first room type to get started",
+      "error": "Unable to fetch room types",
+      "loading": "Loading room types..."
+    },
+    "form": {
+      "property": "Property",
+      "selectProperty": "Select a property",
+      "propertyOfRoomType": "The property of this room type is",
+      "basicInformation": "Basic Information",
+      "title": "Title",
+      "titlePlaceholder": "e.g., Deluxe Room, Suite, Standard Room",
+      "countOfRooms": "Count of rooms",
+      "occupancyInformation": "Occupancy Information",
+      "occAdults": "Maximum Adults",
+      "occChildren": "Maximum Children",
+      "occInfants": "Maximum Infants",
+      "defaultOccupancy": "Default Occupancy",
+      "additionalInformation": "Additional Information",
+      "roomKind": "Room Kind",
+      "selectRoomKind": "Select a room kind",
+      "roomKindPlaceholder": "e.g., standard, deluxe, premium",
+      "capacity": "Total Capacity",
+      "capacityHelp": "Total number of guests this room type can accommodate",
+      "facilities": "Facilities (JSON)",
+      "facilitiesHelp": "Enter facilities as a JSON array, e.g., [\"WiFi\", \"TV\", \"Mini Bar\"]"
+    },
+    "create": {
+      "title": "Create Room Type",
+      "subtitle": "Add a new room type to your property"
+    },
+    "edit": {
+      "title": "Edit Room Type",
+      "subtitle": "Update room type: {{name}}",
+      "notFound": "Room type not found"
+    },
+    "delete": {
+      "title": "Delete Room Type",
+      "message": "Are you sure you want to delete the room type \"{{name}}\"? This will also delete all related availability, content, facilities, and photos."
+    },
+    "validation": {
+      "propertyRequired": "Property is required",
+      "titleRequired": "Title is required",
+      "titleMinLength": "Title must be at least 1 character",
+      "countRequired": "Count of rooms is required",
+      "countInvalid": "Count of rooms must be at least 1",
+      "occAdultsRequired": "Maximum adults is required",
+      "occAdultsInvalid": "Maximum adults must be 0 or greater",
+      "occChildrenRequired": "Maximum children is required",
+      "occChildrenInvalid": "Maximum children must be 0 or greater",
+      "occInfantsRequired": "Maximum infants is required",
+      "occInfantsInvalid": "Maximum infants must be 0 or greater",
+      "defaultOccupancyRequired": "Default occupancy is required",
+      "defaultOccupancyInvalid": "Default occupancy must be at least 1",
+      "capacityInvalid": "Capacity must be at least 1",
+      "roomKindMaxLength": "Room kind must not exceed 50 characters",
+      "facilitiesInvalidJSON": "Facilities must be valid JSON"
+    }
+  },
+  "roomTypeAvailability": {
+    "title": "Room Availability",
+    "subtitle": "Manage daily availability calendar for room types",
+    "stats": {
+      "count": "availability records"
+    },
+    "search": {
+      "placeholder": "Search availability..."
+    },
+    "table": {
+      "date": "Date",
+      "property": "Property",
+      "roomType": "Room Type",
+      "availability": "Available Rooms",
+      "noData": "No availability records yet",
+      "error": "Unable to fetch availability"
+    },
+    "empty": "No availability records for this room type",
+    "addAvailability": "Add Availability",
+    "form": {
+      "property": "Property",
+      "selectProperty": "Select a property",
+      "propertyOfAvailability": "The property of this availability is",
+      "roomType": "Room Type",
+      "selectRoomType": "Select a room type",
+      "roomTypeOfAvailability": "The room type of this availability is",
+      "date": "Date",
+      "availability": "Available Rooms",
+      "availabilityHelp": "Count of rooms available for this date"
+    },
+    "create": {
+      "title": "Create Availability",
+      "subtitle": "Add availability for a specific date"
+    },
+    "edit": {
+      "title": "Edit Availability",
+      "subtitle": "Update availability for {{date}}",
+      "notFound": "Availability record not found"
+    },
+    "delete": {
+      "title": "Delete Availability",
+      "message": "Are you sure you want to delete the availability record for {{date}}?"
+    },
+    "validation": {
+      "propertyRequired": "Property is required",
+      "roomTypeRequired": "Room type is required",
+      "dateRequired": "Date is required",
+      "availabilityRequired": "Available rooms is required",
+      "availabilityInvalid": "Available rooms must be 0 or greater"
+    },
+    "generateYearly": {
+      "button": "Generate 365 Days of Availability",
+      "generating": "Generating...",
+      "confirm": "This will generate 365 days of availability starting from today. Existing availability for these dates will be updated. Continue?",
+      "success": "Successfully generated {{count}} availability records with base availability {{baseAvailability}}",
+      "error": "Failed to generate availability. Please try again.",
+      "errorTitle": "Error generating availability"
+    },
+    "sync": {
+      "synced": "Synced {{ranges}} availability ranges to Channex",
+      "notSynced": "Not synced to Channex",
+      "clickToSync": "Click to sync {{ranges}} availability ranges to Channex",
+      "noAvailability": "No availability to sync. Please generate availability first.",
+      "noRanges": "No availability ranges to sync. Please generate availability first.",
+      "missingChannexIds": "Property and Room Type must be synced to Channex first.",
+      "propertyNotSynced": "Property must be synced to Channex first.",
+      "roomTypeNotSynced": "Room Type must be synced to Channex first.",
+      "loading": "Loading availability...",
+      "error": "Failed to sync availability to Channex. Please try again.",
+      "errorTitle": "Error syncing availability to Channex",
+      "success": "Successfully synced {{ranges}} availability ranges to Channex"
+    },
+    "filters": {
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "filter": "Filter",
+      "clear": "Clear"
+    }
+  },
+  "roomTypeContent": {
+    "title": "Room Content",
+    "subtitle": "Manage descriptions and details for room types",
+    "stats": {
+      "count": "content records"
+    },
+    "search": {
+      "placeholder": "Search room content..."
+    },
+    "table": {
+      "roomType": "Room Type",
+      "description": "Description",
+      "noData": "No room content yet",
+      "error": "Unable to fetch room content"
+    },
+    "empty": "No content available for this room type",
+    "addContent": "Add Content",
+    "form": {
+      "roomType": "Room Type",
+      "selectRoomType": "Select a room type",
+      "roomTypeOfContent": "The room type of this content is",
+      "description": "Description",
+      "descriptionLabel": "Room Description",
+      "descriptionPlaceholder": "Describe the room type..."
+    },
+    "create": {
+      "title": "Create Room Content",
+      "subtitle": "Add content for a room type"
+    },
+    "edit": {
+      "title": "Edit Room Content",
+      "subtitle": "Update content for {{name}}",
+      "notFound": "Room content not found"
+    },
+    "delete": {
+      "title": "Delete Room Content",
+      "message": "Are you sure you want to delete the content for \"{{name}}\"?"
+    },
+    "details": {
+      "description": "Description",
+      "noDescription": "No description available"
+    },
+    "validation": {
+      "roomTypeRequired": "Room type is required",
+      "descriptionRequired": "Description is required"
+    }
+  },
+  "roomTypeFacilities": {
+    "title": "Room Facilities",
+    "subtitle": "Link facilities to room types",
+    "stats": {
+      "count": "facility links"
+    },
+    "table": {
+      "roomType": "Room Type",
+      "facility": "Facility",
+      "noData": "No facility links yet",
+      "error": "Unable to fetch facility links"
+    },
+    "empty": "No facilities linked to this room type",
+    "addLink": "Link Facility",
+    "form": {
+      "linkInformation": "Link Information",
+      "roomType": "Room Type",
+      "selectRoomType": "Select a room type",
+      "roomTypeOfFacility": "The room type of this facility link is",
+      "facility": "Facility",
+      "selectFacility": "Select a facility"
+    },
+    "create": {
+      "title": "Link Facility",
+      "subtitle": "Link a facility to a room type"
+    },
+    "delete": {
+      "title": "Remove Facility Link",
+      "message": "Are you sure you want to remove \"{{facility}}\" from \"{{roomType}}\"?"
+    },
+    "validation": {
+      "roomTypeRequired": "Room type is required",
+      "facilityRequired": "Facility is required"
+    }
+  },
+  "roomTypePhotos": {
+    "title": "Room Photos",
+    "subtitle": "Manage photo galleries for room types",
+    "stats": {
+      "count": "photos"
+    },
+    "search": {
+      "placeholder": "Search room photos..."
+    },
+    "table": {
+      "photo": "Photo",
+      "roomType": "Room Type",
+      "kind": "Type",
+      "position": "Position",
+      "noData": "No photos yet",
+      "error": "Unable to fetch photos"
+    },
+    "empty": "No photos available for this room type",
+    "addPhoto": "Add Photo",
+    "form": {
+      "selection": "Selection",
+      "property": "Property",
+      "selectProperty": "Select a property",
+      "propertyOfPhoto": "The property of this photo is",
+      "roomType": "Room Type",
+      "selectRoomType": "Select a room type",
+      "roomTypeOfPhoto": "The room type of this photo is",
+      "photoInformation": "Photo Information",
+      "url": "Photo URL",
+      "position": "Display Position",
+      "positionHelp": "Order in which photos are displayed (0 = first)",
+      "author": "Author/Credit",
+      "kind": "Photo Type",
+      "selectKind": "Select a photo type",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe this photo..."
+    },
+    "create": {
+      "title": "Add Photo",
+      "subtitle": "Upload a new room photo"
+    },
+    "edit": {
+      "title": "Edit Photo",
+      "subtitle": "Update photo for {{name}}",
+      "notFound": "Photo not found"
+    },
+    "delete": {
+      "title": "Delete Photo",
+      "message": "Are you sure you want to delete this photo for \"{{roomType}}\"?"
+    },
+    "validation": {
+      "propertyRequired": "Property is required",
+      "roomTypeRequired": "Room type is required",
+      "urlRequired": "Photo URL is required",
+      "urlInvalid": "Please enter a valid URL",
+      "positionInvalid": "Position must be 0 or greater",
+      "authorMaxLength": "Author must be 255 characters or less",
+      "kindMaxLength": "Photo type must be 50 characters or less"
+    }
+  },
+  "ratePlans": {
+    "title": "Rate Plans",
+    "subtitle": "Manage pricing strategies for room types",
+    "addRatePlan": "Add Rate Plan",
+    "filteredByRoomType": "Filtered by room type: {{roomTypeName}}",
+    "tabs": {
+      "overview": "Overview",
+      "options": "Options",
+      "rates": "Rates",
+      "dailyRules": "Daily Rules",
+      "periodRules": "Period Rules",
+      "autoRateSettings": "Auto Rate Settings"
+    },
+    "actions": {
+      "overview": "Overview",
+      "options": "Options",
+      "rates": "Rates",
+      "dailyRules": "Daily Rules",
+      "periodRules": "Period Rules",
+      "autoRateSettings": "Auto Rate Settings"
+    },
+    "overview": {
+      "basicInfo": "Basic Information",
+      "pricingInfo": "Pricing Information",
+      "quickStats": "Quick Statistics",
+      "options": "Options",
+      "rates": "Rates",
+      "dailyRules": "Daily Rules",
+      "periodRules": "Period Rules"
+    },
+    "detail": {
+      "subtitle": "Manage rate plan details and related features"
+    },
+    "stats": {
+      "ratePlansCount": "rate plans"
+    },
+    "search": {
+      "placeholder": "Search rate plans..."
+    },
+    "table": {
+      "loading": "Loading rate plans...",
+      "error": "Unable to fetch rate plans",
+      "empty": "No rate plans yet",
+      "subtitle": "All pricing strategies",
+      "title": "Title",
+      "property": "Property",
+      "roomType": "Room Type",
+      "currency": "Currency",
+      "sellMode": "Sell Mode",
+      "rateMode": "Rate Mode",
+      "actions": "Actions",
+      "childPlan": "Child Plan"
+    },
+    "form": {
+      "basicInfo": "Basic Information",
+      "title": "Title",
+      "titlePlaceholder": "Standard Rate Plan",
+      "property": "Property",
+      "selectProperty": "Select a property",
+      "propertyOfRatePlan": "The property of this rate plan is",
+      "roomType": "Room Type",
+      "selectRoomType": "Select a room type",
+      "roomTypeOfRatePlan": "The room type of this rate plan is",
+      "tax": "Tax",
+      "selectTax": "Select a tax",
+      "taxSet": "Tax Set",
+      "selectTaxSet": "Select a tax set",
+      "taxSetOfRatePlan": "The tax set of this rate plan is",
+      "currency": "Currency",
+      "selectCurrency": "Select a currency",
+      "sellMode": "Sell Mode",
+      "selectSellMode": "Select sell mode",
+      "perRoom": "Per Room",
+      "perPerson": "Per Person",
+      "rateMode": "Rate Mode",
+      "selectRateMode": "Select rate mode",
+      "dynamic": "Dynamic",
+      "fixed": "Fixed",
+      "childrenFee": "Children Fee",
+      "infantFee": "Infant Fee",
+      "inheritance": "Inheritance Settings",
+      "parentRatePlan": "Parent Rate Plan",
+      "selectParentRatePlan": "Select parent rate plan",
+      "advancedSettings": "Advanced Settings",
+      "jsonFieldsNote": "Configure advanced restrictions and settings (JSON format)"
+    },
+    "create": {
+      "title": "Create Rate Plan",
+      "subtitle": "Add a new pricing strategy"
+    },
+    "edit": {
+      "title": "Edit Rate Plan",
+      "subtitle": "Update rate plan details",
+      "notFound": "Rate plan not found"
+    },
+    "details": {
+      "title": "Title",
+      "currency": "Currency",
+      "sellMode": "Sell Mode",
+      "rateMode": "Rate Mode",
+      "references": "References",
+      "propertyId": "Property ID",
+      "roomTypeId": "Room Type ID",
+      "taxId": "Tax ID",
+      "parentRatePlanId": "Parent Rate Plan ID",
+      "fees": "Fees",
+      "childrenFee": "Children Fee",
+      "infantFee": "Infant Fee",
+      "inheritance": "Inheritance",
+      "stayRestrictions": "Stay Restrictions",
+      "maxStay": "Max Stay",
+      "minStayArrival": "Min Stay Arrival",
+      "minStayThrough": "Min Stay Through",
+      "availabilityRestrictions": "Availability Restrictions",
+      "closedToArrival": "Closed to Arrival",
+      "closedToDeparture": "Closed to Departure",
+      "stopSell": "Stop Sell",
+      "autoRateSettings": "Auto Rate Settings",
+      "metadata": "Metadata",
+      "id": "ID",
+      "companyId": "Company ID",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "propertyRequired": "Property is required",
+      "roomTypeRequired": "Room type is required",
+      "taxRequired": "Tax is required",
+      "taxSetRequired": "Tax set is required",
+      "currencyRequired": "Currency is required",
+      "currencyInvalid": "Currency must be exactly 3 characters",
+      "sellModeRequired": "Sell mode is required",
+      "rateModeRequired": "Rate mode is required",
+      "childrenFeeInvalid": "Children fee must be 0 or greater",
+      "infantFeeInvalid": "Infant fee must be 0 or greater",
+      "invalidJson": "Invalid JSON format"
+    },
+    "sellMode": {
+      "perRoom": "Per Room",
+      "perPerson": "Per Person"
+    },
+    "rateMode": {
+      "manual": "Manual",
+      "derived": "Derived",
+      "auto": "Auto",
+      "cascade": "Cascade"
+    }
+  },
+  "taxSets": {
+    "title": "Tax Sets",
+    "subtitle": "Manage tax collections for properties",
+    "addTaxSet": "Add Tax Set",
+    "filteredByProperty": "Filtered by property: {{propertyName}}",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "stats": {
+      "taxSetsCount": "tax sets"
+    },
+    "search": {
+      "placeholder": "Search tax sets...",
+      "placeholderFiltered": "Search tax sets for this property..."
+    },
+    "form": {
+      "basicInfo": "Basic Information",
+      "title": "Title",
+      "titlePlaceholder": "Standard Tax Set",
+      "property": "Property",
+      "propertyOfTaxSet": "The property of this tax set is",
+      "currency": "Currency",
+      "selectCurrency": "Select a currency",
+      "status": "Status"
+    },
+    "create": {
+      "title": "Create Tax Set",
+      "subtitle": "Add a new tax collection"
+    },
+    "edit": {
+      "title": "Edit Tax Set",
+      "subtitle": "Update tax set details",
+      "notFound": "Tax set not found"
+    },
+    "details": {
+      "title": "Title",
+      "currency": "Currency",
+      "status": "Status"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "taxes": "Taxes"
+    },
+    "actions": {
+      "overview": "Overview",
+      "taxes": "Taxes"
+    },
+    "overview": {
+      "basicInfo": "Basic Information",
+      "quickStats": "Quick Statistics",
+      "taxes": "Taxes"
+    },
+    "detail": {
+      "subtitle": "Manage tax set details and taxes"
+    },
+    "table": {
+      "loading": "Loading tax sets...",
+      "error": "Unable to fetch tax sets",
+      "empty": "No tax sets yet",
+      "subtitle": "All tax collections",
+      "title": "Title",
+      "property": "Property",
+      "currency": "Currency",
+      "status": "Status",
+      "actions": "Actions",
+      "level": "Priority"
+    },
+    "addTax": "Add Tax",
+    "createNewTax": "Create New Tax",
+    "selectTax": "Select a tax...",
+    "noTaxes": "No taxes in this tax set yet",
+    "noAvailableTaxes": "No taxes available",
+    "allTaxesAdded": "All available taxes have been added to this tax set.",
+    "createTaxFirst": "There are no taxes available for this property. Create a tax first to add it to this tax set.",
+    "validation": {
+      "titleRequired": "Title is required",
+      "titleTooLong": "Title must be 255 characters or less",
+      "propertyRequired": "Property is required",
+      "currencyRequired": "Currency is required",
+      "currencyInvalid": "Currency must be a valid ISO 4217 code (3 uppercase letters)"
+    },
+    "syncedWithChannex": "Synced with Channex",
+    "notSyncedWithChannex": "Not synced with Channex",
+    "clickToSyncChannex": "Click to sync with Channex"
+  },
+  "taxSetItems": {
+    "title": "Tax Set Items",
+    "addItem": "Add Tax Item",
+    "taxType": {
+      "percentage": "Percentage",
+      "fixed": "Fixed Amount"
+    },
+    "appliesTo": {
+      "perNight": "Per Night",
+      "perStay": "Per Stay",
+      "perPerson": "Per Person",
+      "perPersonPerNight": "Per Person Per Night"
+    },
+    "table": {
+      "loading": "Loading tax items...",
+      "error": "Unable to fetch tax items",
+      "empty": "No tax items yet",
+      "label": "Label",
+      "type": "Type",
+      "value": "Value",
+      "appliesTo": "Applies To",
+      "inclusive": "Inclusive",
+      "priority": "Priority",
+      "actions": "Actions"
+    },
+    "form": {
+      "basicInfo": "Basic Information",
+      "taxSet": "Tax Set",
+      "label": "Label",
+      "labelPlaceholder": "e.g., VAT, City Tax",
+      "taxType": "Tax Type",
+      "value": "Value",
+      "valueHelpPercentage": "Enter percentage (e.g., 10.5 for 10.5%)",
+      "valueHelpFixed": "Enter fixed amount",
+      "appliesTo": "Applies To",
+      "isInclusive": "Is Inclusive (tax included in base price)",
+      "isInclusiveHelp": "If checked, the tax is included in the base price",
+      "priority": "Priority",
+      "priorityHelp": "Lower numbers are applied first"
+    },
+    "create": {
+      "title": "Create Tax Item",
+      "subtitle": "Add a new tax item to the tax set"
+    },
+    "edit": {
+      "title": "Edit Tax Item",
+      "subtitle": "Update tax item details",
+      "notFound": "Tax item not found"
+    },
+    "validation": {
+      "taxSetRequired": "Tax set is required",
+      "labelRequired": "Label is required",
+      "valueInvalid": "Value must be a non-negative number",
+      "priorityInvalid": "Priority must be a non-negative integer"
+    }
+  },
+  "ratePlanOptions": {
+    "title": "Rate Plan Options",
+    "subtitle": "Manage occupancy-based pricing",
+    "addOption": "Add Option",
+    "stats": {
+      "optionsCount": "options"
+    },
+    "search": {
+      "placeholder": "Search options..."
+    },
+    "table": {
+      "loading": "Loading options...",
+      "error": "Unable to fetch options",
+      "empty": "No options yet",
+      "subtitle": "Occupancy pricing options",
+      "ratePlan": "Rate Plan",
+      "occupancy": "Occupancy",
+      "rate": "Rate",
+      "isPrimary": "Primary",
+      "primary": "Primary",
+      "actions": "Actions"
+    },
+    "form": {
+      "basicInfo": "Option Information",
+      "ratePlan": "Rate Plan",
+      "selectRatePlan": "Select a rate plan",
+      "occupancy": "Occupancy",
+      "rate": "Rate",
+      "isPrimary": "Primary Option"
+    },
+    "create": {
+      "title": "Create Option",
+      "subtitle": "Add occupancy pricing option"
+    },
+    "edit": {
+      "title": "Edit Option",
+      "subtitle": "Update option details",
+      "notFound": "Option not found"
+    },
+    "validation": {
+      "ratePlanRequired": "Rate plan is required",
+      "occupancyInvalid": "Occupancy must be at least 1",
+      "rateInvalid": "Rate must be 0 or greater"
+    }
+  },
+  "ratePlanRates": {
+    "title": "Rate Plan Rates",
+    "subtitle": "Manage daily rates for specific dates",
+    "addRate": "Add Rate",
+    "stats": {
+      "ratesCount": "rates"
+    },
+    "search": {
+      "placeholder": "Search rates..."
+    },
+    "generateYearly": {
+      "button": "Generate 365 Days of Rates",
+      "generating": "Generating...",
+      "confirm": "This will generate 365 days of rates starting from today. Existing rates for these dates will be updated. Continue?",
+      "success": "Successfully generated {{count}} rates with base rate ${{baseRate}}",
+      "error": "Failed to generate rates. Please try again.",
+      "errorTitle": "Error generating rates"
+    },
+    "sync": {
+      "synced": "Synced {{ranges}} rate ranges to Channex",
+      "notSynced": "Not synced to Channex",
+      "clickToSync": "Click to sync {{ranges}} rate ranges to Channex",
+      "noRates": "No rates to sync. Please generate rates first.",
+      "noRanges": "No rate ranges to sync. Please generate rates first.",
+      "missingChannexIds": "Property and Rate Plan must be synced to Channex first.",
+      "propertyNotSynced": "Property must be synced to Channex first.",
+      "ratePlanNotSynced": "Rate Plan must be synced to Channex first.",
+      "loading": "Loading rates...",
+      "error": "Failed to sync rates to Channex. Please try again.",
+      "errorTitle": "Error syncing rates to Channex",
+      "success": "Successfully synced {{ranges}} rate ranges to Channex"
+    },
+    "filters": {
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "filter": "Filter",
+      "clear": "Clear"
+    },
+    "pagination": {
+      "showing": "Showing {{from}} to {{to}} of {{total}} rates"
+    },
+    "emptyFiltered": "No rates found for the selected date range",
+    "table": {
+      "loading": "Loading rates...",
+      "error": "Unable to fetch rates",
+      "empty": "No rates yet",
+      "subtitle": "Daily pricing rates",
+      "property": "Property",
+      "ratePlan": "Rate Plan",
+      "date": "Date",
+      "rate": "Rate",
+      "actions": "Actions"
+    },
+    "form": {
+      "basicInfo": "Rate Information",
+      "property": "Property",
+      "selectProperty": "Select a property",
+      "propertyOfRate": "The property of this rate is",
+      "ratePlan": "Rate Plan",
+      "selectRatePlan": "Select a rate plan",
+      "ratePlanOfRate": "The rate plan of this rate is",
+      "date": "Date",
+      "rate": "Rate"
+    },
+    "create": {
+      "title": "Create Rate",
+      "subtitle": "Add daily rate for specific date"
+    },
+    "edit": {
+      "title": "Edit Rate",
+      "subtitle": "Update rate details",
+      "notFound": "Rate not found"
+    },
+    "validation": {
+      "propertyRequired": "Property is required",
+      "ratePlanRequired": "Rate plan is required",
+      "dateRequired": "Date is required",
+      "rateInvalid": "Rate must be 0 or greater"
+    }
+  },
+  "ratePlanDailyRules": {
+    "title": "Daily Rules",
+    "subtitle": "Manage weekday-based restrictions",
+    "addRule": "Add Daily Rule",
+    "stats": {
+      "rulesCount": "rules"
+    },
+    "search": {
+      "placeholder": "Search daily rules..."
+    },
+    "weekdays": {
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday",
+      "7": "Sunday"
+    },
+    "form": {
+      "basicInfo": "Daily Rule Information",
+      "ratePlan": "Rate Plan",
+      "selectRatePlan": "Select a rate plan",
+      "weekday": "Weekday",
+      "selectWeekday": "Select a weekday",
+      "maxStay": "Max Stay (nights)",
+      "minStayArrival": "Min Stay Arrival (nights)",
+      "minStayThrough": "Min Stay Through (nights)",
+      "restrictions": "Restrictions",
+      "closedToArrival": "Closed to Arrival",
+      "closedToDeparture": "Closed to Departure",
+      "stopSell": "Stop Sell"
+    },
+    "table": {
+      "loading": "Loading daily rules...",
+      "error": "Unable to fetch daily rules",
+      "empty": "No daily rules yet",
+      "subtitle": "Weekday-based restrictions",
+      "ratePlan": "Rate Plan",
+      "weekday": "Weekday",
+      "maxStay": "Max Stay",
+      "minStayArrival": "Min Arrival",
+      "minStayThrough": "Min Through",
+      "restrictions": "Restrictions",
+      "actions": "Actions"
+    },
+    "create": {
+      "title": "Create Daily Rule",
+      "subtitle": "Add weekday-based restriction"
+    },
+    "edit": {
+      "title": "Edit Daily Rule",
+      "subtitle": "Update daily rule details",
+      "notFound": "Daily rule not found"
+    },
+    "validation": {
+      "ratePlanRequired": "Rate plan is required",
+      "weekdayRequired": "Weekday is required",
+      "maxStayInvalid": "Max stay must be at least 1 night",
+      "minStayArrivalInvalid": "Min stay arrival must be at least 1 night",
+      "minStayThroughInvalid": "Min stay through must be at least 1 night"
+    }
+  },
+  "ratePlanPeriodRules": {
+    "title": "Period Rules",
+    "subtitle": "Manage date-range restrictions",
+    "addRule": "Add Period Rule",
+    "stats": {
+      "rulesCount": "rules"
+    },
+    "search": {
+      "placeholder": "Search period rules..."
+    },
+    "form": {
+      "basicInfo": "Period Rule Information",
+      "ratePlan": "Rate Plan",
+      "selectRatePlan": "Select a rate plan",
+      "ratePlanOfRule": "The rate plan of this period rule is",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "maxStay": "Max Stay (nights)",
+      "minStayArrival": "Min Stay Arrival (nights)",
+      "minStayThrough": "Min Stay Through (nights)",
+      "restrictions": "Restrictions",
+      "closedToArrival": "Closed to Arrival",
+      "closedToDeparture": "Closed to Departure",
+      "stopSell": "Stop Sell"
+    },
+    "table": {
+      "loading": "Loading period rules...",
+      "error": "Unable to fetch period rules",
+      "empty": "No period rules yet",
+      "subtitle": "Date-range restrictions",
+      "ratePlan": "Rate Plan",
+      "dateRange": "Date Range",
+      "maxStay": "Max Stay",
+      "minStayArrival": "Min Arrival",
+      "minStayThrough": "Min Through",
+      "restrictions": "Restrictions",
+      "actions": "Actions"
+    },
+    "create": {
+      "title": "Create Period Rule",
+      "subtitle": "Add date-range restriction"
+    },
+    "edit": {
+      "title": "Edit Period Rule",
+      "subtitle": "Update period rule details",
+      "notFound": "Period rule not found"
+    },
+    "validation": {
+      "ratePlanRequired": "Rate plan is required",
+      "startDateRequired": "Start date is required",
+      "endDateRequired": "End date is required",
+      "endDateAfterStart": "End date must be after start date",
+      "maxStayInvalid": "Max stay must be at least 1 night",
+      "minStayArrivalInvalid": "Min stay arrival must be at least 1 night",
+      "minStayThroughInvalid": "Min stay through must be at least 1 night"
+    }
+  },
+  "ratePlanAutoRateSettings": {
+    "title": "Auto Rate Settings",
+    "subtitle": "Manage derived pricing settings",
+    "addSetting": "Add Setting",
+    "stats": {
+      "settingsCount": "settings"
+    },
+    "search": {
+      "placeholder": "Search settings..."
+    },
+    "form": {
+      "basicInfo": "Setting Information",
+      "ratePlan": "Rate Plan",
+      "selectRatePlan": "Select a rate plan",
+      "ratePlanOfSetting": "The rate plan of this auto rate setting is",
+      "ruleName": "Rule Name",
+      "ruleNamePlaceholder": "e.g., markup_percentage",
+      "ruleNameHelp": "Use lowercase with underscores (e.g., markup_percentage, rounding_rule)",
+      "ruleValue": "Rule Value",
+      "ruleValuePlaceholder": "e.g., 10",
+      "ruleValueHelp": "Enter the value for this rule (e.g., 10, nearest_5, etc.)"
+    },
+    "table": {
+      "loading": "Loading settings...",
+      "error": "Unable to fetch settings",
+      "empty": "No settings yet",
+      "subtitle": "Derived pricing settings",
+      "ratePlan": "Rate Plan",
+      "ruleName": "Rule Name",
+      "ruleValue": "Rule Value",
+      "actions": "Actions"
+    },
+    "create": {
+      "title": "Create Auto Rate Setting",
+      "subtitle": "Add derived pricing setting"
+    },
+    "edit": {
+      "title": "Edit Auto Rate Setting",
+      "subtitle": "Update setting details",
+      "notFound": "Setting not found"
+    },
+    "validation": {
+      "ratePlanRequired": "Rate plan is required",
+      "ruleNameRequired": "Rule name is required",
+      "ruleValueRequired": "Rule value is required"
+    }
+  },
+  "taxes": {
+    "title": "Taxes",
+    "subtitle": "Manage property taxes and fees",
+    "addTax": "Add Tax",
+    "type": {
+      "tax": "Tax",
+      "fee": "Fee",
+      "cityTax": "City Tax"
+    },
+    "logic": {
+      "percent": "Percent",
+      "perRoom": "Per Room",
+      "perRoomPerNight": "Per Room Per Night",
+      "perPerson": "Per Person",
+      "perPersonPerNight": "Per Person Per Night",
+      "perNight": "Per Night",
+      "perBooking": "Per Booking"
+    },
+    "syncedWithChannex": "Tax synced with Channex",
+    "notSyncedWithChannex": "Tax not synced with Channex",
+    "clickToSyncChannex": "Click to sync tax with Channex",
+    "stats": {
+      "taxesCount": "taxes"
+    },
+    "search": {
+      "placeholder": "Search taxes..."
+    },
+    "form": {
+      "basicInfo": "Tax Information",
+      "property": "Property",
+      "selectProperty": "Select a property",
+      "propertyOfTax": "The property of this tax is",
+      "title": "Title",
+      "titlePlaceholder": "VAT, City Tax, Tourist Tax, etc.",
+      "logic": "Tax Logic",
+      "selectLogic": "Select tax logic",
+      "logicOptions": {
+        "percent": "Percent",
+        "per_room": "Per Room",
+        "per_room_per_night": "Per Room Per Night",
+        "per_person": "Per Person",
+        "per_person_per_night": "Per Person Per Night",
+        "per_night": "Per Night",
+        "per_booking": "Per Booking"
+      },
+      "type": "Tax Type",
+      "selectType": "Select tax type",
+      "typeOptions": {
+        "tax": "Tax",
+        "fee": "Fee",
+        "city_tax": "City Tax"
+      },
+      "rate": "Rate",
+      "rateHelp": "Enter the tax rate or amount",
+      "isInclusive": "Tax Inclusive",
+      "isInclusiveHelp": "Tax is included in the displayed price",
+      "skipNights": "Skip Nights",
+      "skipNightsHelp": "Number of nights to skip before applying tax",
+      "maxNights": "Max Nights",
+      "maxNightsHelp": "Maximum number of nights to apply tax"
+    },
+    "table": {
+      "loading": "Loading taxes...",
+      "error": "Unable to fetch taxes",
+      "empty": "No taxes yet",
+      "subtitle": "Property taxes and fees",
+      "title": "Title",
+      "property": "Property",
+      "logic": "Logic",
+      "type": "Type",
+      "rate": "Rate",
+      "inclusive": "Inclusive",
+      "exclusive": "Exclusive",
+      "actions": "Actions"
+    },
+    "create": {
+      "title": "Create Tax",
+      "subtitle": "Add a new tax or fee"
+    },
+    "edit": {
+      "title": "Edit Tax",
+      "subtitle": "Update tax details",
+      "notFound": "Tax not found"
+    },
+    "delete": {
+      "warning": "This will also delete all related date ranges. This action cannot be undone."
+    },
+    "validation": {
+      "propertyRequired": "Property is required",
+      "titleRequired": "Title is required",
+      "logicRequired": "Tax logic is required",
+      "logicInvalid": "Tax logic must be one of: percent, per_room, per_room_per_night, per_person, per_person_per_night, per_night, per_booking",
+      "typeRequired": "Tax type is required",
+      "typeInvalid": "Tax type must be one of: tax, fee, city_tax",
+      "rateRequired": "Rate is required",
+      "rateInvalid": "Rate must be 0 or greater",
+      "skipNightsInvalid": "Skip nights must be at least 1",
+      "maxNightsInvalid": "Max nights must be at least 1"
+    }
+  },
+  "taxApplicableDateRanges": {
+    "title": "Tax Date Ranges",
+    "subtitle": "Manage when taxes are applicable",
+    "addRange": "Add Date Range",
+    "stats": {
+      "rangesCount": "ranges"
+    },
+    "search": {
+      "placeholder": "Search date ranges..."
+    },
+    "form": {
+      "basicInfo": "Date Range Information",
+      "tax": "Tax",
+      "selectTax": "Select a tax",
+      "dateAfter": "Start Date",
+      "dateAfterHelp": "Tax applies from this date (inclusive)",
+      "dateBefore": "End Date",
+      "dateBeforeHelp": "Tax applies until this date (inclusive)"
+    },
+    "table": {
+      "loading": "Loading date ranges...",
+      "error": "Unable to fetch date ranges",
+      "empty": "No date ranges yet",
+      "subtitle": "Tax applicability periods",
+      "tax": "Tax",
+      "dateRange": "Date Range",
+      "actions": "Actions"
+    },
+    "create": {
+      "title": "Create Date Range",
+      "subtitle": "Define when tax is applicable"
+    },
+    "edit": {
+      "title": "Edit Date Range",
+      "subtitle": "Update date range details",
+      "notFound": "Date range not found"
+    },
+    "validation": {
+      "taxRequired": "Tax is required",
+      "dateAfterRequired": "Start date is required",
+      "dateBeforeRequired": "End date is required",
+      "dateBeforeAfterDateAfter": "End date must be on or after start date"
+    }
+  },
+  "reservationPolicies": {
+    "title": "Reservation Policies"
+  },
+  "reservationAdvancePolicies": {
+    "title": "Advance Payment Policies",
+    "description": "Manage deposit and advance payment rules",
+    "policiesCount": "policies",
+    "addPolicy": "Add Advance Policy",
+    "searchPlaceholder": "Search advance policies...",
+    "createTitle": "Create Advance Payment Policy",
+    "createDescription": "Define deposit requirements for bookings",
+    "editTitle": "Edit Advance Payment Policy",
+    "editDescription": "Update deposit policy settings",
+    "form": {
+      "property": "Property",
+      "ratePlan": "Rate Plan (Optional)",
+      "ratePlanOptional": "Leave empty to apply to all rate plans",
+      "title": "Policy Title",
+      "titlePlaceholder": "e.g., 30% Deposit 7 Days Before",
+      "description": "Description",
+      "descriptionPlaceholder": "Additional policy details...",
+      "chargeLogic": "Charge Type",
+      "chargeLogicPercent": "Percentage",
+      "chargeLogicAmount": "Fixed Amount",
+      "chargeLogicNights": "Number of Nights",
+      "chargeValue": "Charge Value",
+      "chargeValuePlaceholder": "e.g., 30 for 30%",
+      "dueType": "Payment Due",
+      "dueTypeAtBooking": "At Booking",
+      "dueTypeBeforeArrival": "Before Arrival",
+      "dueDaysBeforeArrival": "Days Before Arrival",
+      "dueDaysBeforeArrivalPlaceholder": "e.g., 7",
+      "minNights": "Minimum Nights (Optional)",
+      "minNightsPlaceholder": "e.g., 1",
+      "maxNights": "Maximum Nights (Optional)",
+      "maxNightsPlaceholder": "e.g., 30",
+      "errors": {
+        "propertyRequired": "Property is required",
+        "titleRequired": "Title is required",
+        "chargeValueRequired": "Charge value is required",
+        "chargeValueNonNegative": "Charge value must be non-negative",
+        "dueDaysNonNegative": "Days before arrival must be non-negative",
+        "minNightsNonNegative": "Minimum nights must be non-negative",
+        "maxNightsNonNegative": "Maximum nights must be non-negative",
+        "maxNightsGreaterThanMin": "Maximum nights must be greater than or equal to minimum nights"
+      }
+    },
+    "table": {
+      "loading": "Loading advance policies...",
+      "error": "Unable to fetch advance policies",
+      "empty": "No advance policies yet",
+      "subtitle": "Deposit requirements",
+      "title": "Policy",
+      "property": "Property",
+      "charge": "Charge",
+      "due": "Due",
+      "dateRanges": "Date Ranges",
+      "actions": "Actions",
+      "manageDateRanges": "Click to manage date ranges"
+    },
+    "dateRanges": {
+      "title": "Date Ranges",
+      "subtitle": "Manage when this policy applies",
+      "count": "{{count}} date range",
+      "count_plural": "{{count}} date ranges",
+      "manage": "Manage Date Ranges"
+    }
+  },
+  "reservationAdvancePolicyDateRanges": {
+    "title": "Advance Policy Date Ranges",
+    "description": "Manage when advance policies apply",
+    "rangesCount": "ranges",
+    "addRange": "Add Date Range",
+    "createTitle": "Create Date Range",
+    "createDescription": "Define when advance policy applies",
+    "editTitle": "Edit Date Range",
+    "editDescription": "Update date range settings",
+    "form": {
+      "dateAfter": "Start Date",
+      "dateBefore": "End Date",
+      "errors": {
+        "dateAfterRequired": "Start date is required",
+        "dateBeforeRequired": "End date is required",
+        "dateBeforeAfter": "End date must be on or after start date"
+      }
+    },
+    "table": {
+      "loading": "Loading date ranges...",
+      "error": "Unable to fetch date ranges",
+      "empty": "No date ranges yet",
+      "subtitle": "Policy applicability periods",
+      "policy": "Policy",
+      "dateAfter": "Start Date",
+      "dateBefore": "End Date",
+      "actions": "Actions"
+    }
+  },
+  "reservationCancellationPolicies": {
+    "title": "Cancellation Policies",
+    "description": "Manage cancellation and refund rules",
+    "policiesCount": "policies",
+    "addPolicy": "Add Cancellation Policy",
+    "searchPlaceholder": "Search cancellation policies...",
+    "createTitle": "Create Cancellation Policy",
+    "createDescription": "Define cancellation and penalty rules",
+    "editTitle": "Edit Cancellation Policy",
+    "editDescription": "Update cancellation policy settings",
+    "form": {
+      "property": "Property",
+      "ratePlan": "Rate Plan (Optional)",
+      "ratePlanOptional": "Leave empty to apply to all rate plans",
+      "title": "Policy Title",
+      "titlePlaceholder": "e.g., Free Cancellation 48h",
+      "description": "Description",
+      "descriptionPlaceholder": "Additional policy details...",
+      "isRefundable": "Refundable",
+      "freeCancellationDays": "Free Cancellation Days",
+      "freeCancellationDaysPlaceholder": "e.g., 2 for 48 hours",
+      "penaltyLogic": "Penalty Type",
+      "penaltyLogicPercent": "Percentage",
+      "penaltyLogicAmount": "Fixed Amount",
+      "penaltyLogicNights": "Number of Nights",
+      "penaltyValue": "Penalty Value",
+      "penaltyValuePlaceholder": "e.g., 50 for 50%",
+      "noShowPenaltyLogic": "No-Show Penalty Type",
+      "noShowPenaltyValue": "No-Show Penalty Value",
+      "noShowPenaltyValuePlaceholder": "e.g., 100 for 100%",
+      "minNights": "Minimum Nights (Optional)",
+      "minNightsPlaceholder": "e.g., 1",
+      "maxNights": "Maximum Nights (Optional)",
+      "maxNightsPlaceholder": "e.g., 30",
+      "errors": {
+        "propertyRequired": "Property is required",
+        "titleRequired": "Title is required",
+        "penaltyValueRequired": "Penalty value is required",
+        "penaltyValueNonNegative": "Penalty value must be non-negative",
+        "freeCancellationDaysNonNegative": "Free cancellation days must be non-negative",
+        "noShowPenaltyValueNonNegative": "No-show penalty value must be non-negative",
+        "minNightsNonNegative": "Minimum nights must be non-negative",
+        "maxNightsNonNegative": "Maximum nights must be non-negative",
+        "maxNightsGreaterThanMin": "Maximum nights must be greater than or equal to minimum nights"
+      }
+    },
+    "table": {
+      "loading": "Loading cancellation policies...",
+      "error": "Unable to fetch cancellation policies",
+      "empty": "No cancellation policies yet",
+      "subtitle": "Cancellation and refund rules",
+      "title": "Policy",
+      "property": "Property",
+      "refundable": "Refundable",
+      "penalty": "Penalty",
+      "dateRanges": "Date Ranges",
+      "actions": "Actions",
+      "manageDateRanges": "Click to manage date ranges"
+    },
+    "dateRanges": {
+      "title": "Date Ranges",
+      "subtitle": "Manage when this policy applies",
+      "count": "{{count}} date range",
+      "count_plural": "{{count}} date ranges",
+      "manage": "Manage Date Ranges"
+    }
+  },
+  "reservationCancellationPolicyDateRanges": {
+    "title": "Cancellation Policy Date Ranges",
+    "description": "Manage when cancellation policies apply",
+    "rangesCount": "ranges",
+    "addRange": "Add Date Range",
+    "createTitle": "Create Date Range",
+    "createDescription": "Define when cancellation policy applies",
+    "editTitle": "Edit Date Range",
+    "editDescription": "Update date range settings",
+    "form": {
+      "dateAfter": "Start Date",
+      "dateBefore": "End Date",
+      "errors": {
+        "dateAfterRequired": "Start date is required",
+        "dateBeforeRequired": "End date is required",
+        "dateBeforeAfter": "End date must be on or after start date"
+      }
+    },
+    "table": {
+      "loading": "Loading date ranges...",
+      "error": "Unable to fetch date ranges",
+      "empty": "No date ranges yet",
+      "subtitle": "Policy applicability periods",
+      "policy": "Policy",
+      "dateAfter": "Start Date",
+      "dateBefore": "End Date",
+      "actions": "Actions"
+    }
+  },
+  "groups": {
+    "title": "Groups",
+    "subtitle": "Manage property groups",
+    "addGroup": "Add Group",
+    "stats": {
+      "groupsCount": "groups"
+    },
+    "search": {
+      "placeholder": "Search groups..."
+    },
+    "form": {
+      "basicInfo": "Group Information",
+      "title": "Title",
+      "titlePlaceholder": "e.g., South London Group"
+    },
+    "table": {
+      "loading": "Loading groups...",
+      "error": "Unable to fetch groups",
+      "empty": "No groups yet",
+      "subtitle": "Property groups",
+      "title": "Title",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "actions": "Actions",
+      "viewProperties": "View properties in this group"
+    },
+    "create": {
+      "title": "Create Group",
+      "subtitle": "Add a new group"
+    },
+    "edit": {
+      "title": "Edit Group",
+      "subtitle": "Update group details",
+      "notFound": "Group not found"
+    },
+    "details": {
+      "title": "Title",
+      "metadata": "Metadata",
+      "id": "ID",
+      "companyId": "Company ID",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "titleTooLong": "Title cannot exceed 255 characters"
+    },
+    "detail": {
+      "loading": "Loading...",
+      "subtitle": "Group details and properties",
+      "tabs": {
+        "properties": "Properties"
+      },
+      "filteredProperties": "Showing properties in group: {{groupName}}",
+      "searchPropertiesPlaceholder": "Search properties in this group..."
+    }
+  },
+  "planning": {
+    "validation": {
+      "invalidAvailability": "Invalid availability values. Availability must be a whole number between 1 and 12. Invalid dates: {{dates}}"
+    },
+    "title": "Planning",
+    "subtitle": "Manage availability and rates",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "roomType": "Room Type / Rate Plan",
+    "saveChanges": "Save",
+    "resetChanges": "Reset",
+    "saving": "Saving...",
+    "saveSuccess": "Changes saved successfully!",
+    "saveError": "Error saving changes: ",
+    "noPropertySelected": "Please select a property to view planning.",
+    "error": "Error loading planning data.",
+    "noData": "No planning data available.",
+    "filters": {
+      "roomTypes": "Rooms filter",
+      "ratePlans": "Rates filter",
+      "clear": "Clear filters",
+      "allRoomTypes": "All room types",
+      "allRatePlans": "All rate plans"
+    }
+  }
+}
