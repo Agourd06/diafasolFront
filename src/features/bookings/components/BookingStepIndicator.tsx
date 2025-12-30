@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { BOOKING_STEPS } from '../types';
 
 interface BookingStepIndicatorProps {
@@ -15,11 +16,12 @@ interface BookingStepIndicatorProps {
 
 const BookingStepIndicator: React.FC<BookingStepIndicatorProps> = ({
   currentStep,
-  completedSteps,
+  completedSteps = [], // Default to empty array
   onStepClick,
 }) => {
+  const { t } = useTranslation();
   const getStepStatus = (stepId: number) => {
-    if (completedSteps.includes(stepId)) return 'completed';
+    if (completedSteps?.includes(stepId)) return 'completed';
     if (stepId === currentStep) return 'current';
     if (stepId < currentStep) return 'available';
     return 'upcoming';
@@ -47,7 +49,7 @@ const BookingStepIndicator: React.FC<BookingStepIndicatorProps> = ({
   };
 
   return (
-    <div className="w-full py-6">
+    <div className="w-full py-6 px-5">
       <div className="flex items-center justify-between relative">
         {BOOKING_STEPS.map((step, index) => {
           const status = getStepStatus(step.id);
@@ -90,9 +92,11 @@ const BookingStepIndicator: React.FC<BookingStepIndicatorProps> = ({
                 {/* Step Label */}
                 <div className="absolute top-14 text-center w-32">
                   <p className={`text-sm font-medium ${status === 'current' ? 'text-blue-600' : 'text-gray-600'}`}>
-                    {step.label}
+                    {t(`bookings.steps.${step.id}.label`, { defaultValue: step.label })}
                   </p>
-                  <p className="text-xs text-gray-500 mt-0.5">{step.description}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    {t(`bookings.steps.${step.id}.description`, { defaultValue: step.description })}
+                  </p>
                 </div>
               </div>
             </React.Fragment>

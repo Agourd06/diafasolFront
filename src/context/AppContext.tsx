@@ -7,7 +7,7 @@ import type { RoomType } from "@/features/room-types/types";
 import type { RatePlan } from "@/features/rate-plans/types";
 import { useCompany, useAuth } from "@/hooks/useAuth";
 import { getStoredAppContext, setStoredAppContext, removeStoredAppContext } from "@/utils/storage";
-import { getGroupById } from "@/api/groups.api";
+import { getGroupById, getGroups } from "@/api/groups.api";
 import { getPropertyById } from "@/api/properties.api";
 import { getTaxSetById } from "@/api/tax-sets.api";
 import { getRoomTypeById } from "@/api/room-types.api";
@@ -59,10 +59,7 @@ export const AppProvider: React.FC<Props> = ({ children }) => {
   // Fetch groups to verify stored groupId or auto-select first one
   const { data: allGroupsData, isLoading: isLoadingGroups } = useQuery({
     queryKey: ['groups', 'all', companyId],
-    queryFn: async () => {
-      const { getGroups } = await import('@/api/groups.api');
-      return await getGroups({ limit: 100, sortBy: 'title', sortOrder: 'ASC' });
-    },
+    queryFn: () => getGroups({ limit: 100, sortBy: 'title', sortOrder: 'ASC' }),
     enabled: !!companyId,
     staleTime: 5 * 60 * 1000,
     retry: 2,

@@ -11,6 +11,7 @@ import { useCreateBooking } from '../../hooks';
 import { useBookingWizard } from '../../context/BookingWizardContext';
 import { getProperties } from '@/api/properties.api';
 import { CURRENCIES } from '@/constants/currencies';
+import { validateBookingForm } from '../../validation';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import type { BookingStatus, CreateBookingPayload } from '../../types';
@@ -47,28 +48,9 @@ const BookingForm: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validate = (): boolean => {
-    const newErrors: Record<string, string> = {};
-
-    if (!formData.propertyId) newErrors.propertyId = 'Property is required';
-    if (!formData.status) newErrors.status = 'Status is required';
-    if (!formData.arrivalDate) newErrors.arrivalDate = 'Arrival date is required';
-    if (!formData.departureDate) newErrors.departureDate = 'Departure date is required';
-    if (!formData.amount) newErrors.amount = 'Amount is required';
-    if (formData.amount && isNaN(parseFloat(formData.amount))) {
-      newErrors.amount = 'Amount must be a valid number';
-    }
-
-    // Validate dates
-    if (formData.arrivalDate && formData.departureDate) {
-      const arrival = new Date(formData.arrivalDate);
-      const departure = new Date(formData.departureDate);
-      if (departure <= arrival) {
-        newErrors.departureDate = 'Departure must be after arrival';
-      }
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    const validationErrors = validateBookingForm(formData);
+    setErrors(validationErrors);
+    return Object.keys(validationErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -132,6 +114,16 @@ const BookingForm: React.FC = () => {
 
       const result = await createBookingMutation.mutateAsync(payload);
       
+      // Validate the booking ID was returned
+      if (!result?.id) {
+        console.error('❌ Booking created but no ID returned:', result);
+        alert(t('bookings.errors.bookingCreatedNoId', { defaultValue: 'Error: Booking was created but no ID was returned. Please try again.' }));
+        return;
+      }
+
+      console.log('✅ Booking created successfully with ID:', result.id);
+      console.log('📋 Full booking response:', result);
+      
       // Save to wizard state
       setBooking(payload);
       setBookingId(result.id);
@@ -146,7 +138,7 @@ const BookingForm: React.FC = () => {
           : error.response.data.message;
         alert(`Error: ${errorMessage}`);
       } else {
-        alert(`Failed to create booking: ${error.message || 'Unknown error'}`);
+        alert(t('bookings.errors.createBookingFailed', { defaultValue: 'Failed to create booking: {{message}}', message: error.message || 'Unknown error' }));
       }
     }
   };
@@ -223,7 +215,9 @@ const BookingForm: React.FC = () => {
               name="arrivalDate"
               value={formData.arrivalDate}
               onChange={handleChange}
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                errors.arrivalDate ? 'border-red-500 bg-red-50' : 'border-gray-300'
+              }`}
             />
             {errors.arrivalDate && <p className="text-red-500 text-xs mt-1">{errors.arrivalDate}</p>}
           </div>
@@ -238,7 +232,9 @@ const BookingForm: React.FC = () => {
               name="departureDate"
               value={formData.departureDate}
               onChange={handleChange}
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                errors.departureDate ? 'border-red-500 bg-red-50' : 'border-gray-300'
+              }`}
             />
             {errors.departureDate && <p className="text-red-500 text-xs mt-1">{errors.departureDate}</p>}
           </div>
@@ -254,9 +250,12 @@ const BookingForm: React.FC = () => {
               value={formData.amount}
               onChange={handleChange}
               placeholder="220.00"
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                errors.amount ? 'border-red-500 bg-red-50' : 'border-gray-300'
+              }`}
             />
             {errors.amount && <p className="text-red-500 text-xs mt-1">{errors.amount}</p>}
+            <p className="text-xs text-gray-500 mt-1">{t('bookings.helpers.amountFormat', { defaultValue: 'Enter a positive number with up to 2 decimal places' })}</p>
           </div>
 
           {/* Currency */}
@@ -288,9 +287,13 @@ const BookingForm: React.FC = () => {
               name="uniqueId"
               value={formData.uniqueId}
               onChange={handleChange}
-              placeholder="BDC-1556013801"
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder={t('bookings.placeholders.uniqueId', { defaultValue: 'BDC-1556013801' })}
+              className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                errors.uniqueId ? 'border-red-500 bg-red-50' : 'border-gray-300'
+              }`}
             />
+            {errors.uniqueId && <p className="text-red-500 text-xs mt-1">{errors.uniqueId}</p>}
+            <p className="text-xs text-gray-500 mt-1">{t('bookings.helpers.uniqueIdFormat', { defaultValue: 'Format: ABC-123456 (e.g., BDC-1556013801)' })}</p>
           </div>
 
           {/* OTA Reservation Code */}
@@ -304,8 +307,12 @@ const BookingForm: React.FC = () => {
               value={formData.otaReservationCode}
               onChange={handleChange}
               placeholder="1556013801"
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                errors.otaReservationCode ? 'border-red-500 bg-red-50' : 'border-gray-300'
+              }`}
             />
+            {errors.otaReservationCode && <p className="text-red-500 text-xs mt-1">{errors.otaReservationCode}</p>}
+            <p className="text-xs text-gray-500 mt-1">{t('bookings.helpers.otaReservationCodeFormat', { defaultValue: 'Numbers only' })}</p>
           </div>
 
           {/* OTA Name */}
@@ -318,7 +325,7 @@ const BookingForm: React.FC = () => {
               name="otaName"
               value={formData.otaName}
               onChange={handleChange}
-              placeholder="Booking.com"
+              placeholder={t('bookings.placeholders.otaName', { defaultValue: 'Booking.com' })}
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
@@ -348,8 +355,12 @@ const BookingForm: React.FC = () => {
               value={formData.otaCommission}
               onChange={handleChange}
               placeholder="10.00"
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                errors.otaCommission ? 'border-red-500 bg-red-50' : 'border-gray-300'
+              }`}
             />
+            {errors.otaCommission && <p className="text-red-500 text-xs mt-1">{errors.otaCommission}</p>}
+            <p className="text-xs text-gray-500 mt-1">{t('bookings.helpers.otaCommissionFormat', { defaultValue: 'Enter a positive number with up to 2 decimal places' })}</p>
           </div>
 
           {/* Occupancy */}
@@ -359,7 +370,7 @@ const BookingForm: React.FC = () => {
             </label>
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs text-gray-600 mb-1">Adults</label>
+                <label className="block text-xs text-gray-600 mb-1">{t('bookings.labels.adults', { defaultValue: 'Adults' })}</label>
                 <input
                   type="number"
                   name="adultsCount"
@@ -370,7 +381,7 @@ const BookingForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-600 mb-1">Children</label>
+                <label className="block text-xs text-gray-600 mb-1">{t('bookings.labels.children', { defaultValue: 'Children' })}</label>
                 <input
                   type="number"
                   name="childrenCount"
@@ -381,7 +392,7 @@ const BookingForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-xs text-gray-600 mb-1">Infants</label>
+                <label className="block text-xs text-gray-600 mb-1">{t('bookings.labels.infants', { defaultValue: 'Infants' })}</label>
                 <input
                   type="number"
                   name="infantsCount"
@@ -404,7 +415,7 @@ const BookingForm: React.FC = () => {
               value={formData.notes}
               onChange={handleChange}
               rows={3}
-              placeholder="Additional notes..."
+              placeholder={t('bookings.placeholders.notes', { defaultValue: 'Additional notes...' })}
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>

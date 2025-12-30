@@ -8,7 +8,6 @@ import { useTaxSetsByProperty } from '@/features/tax-sets/hooks/useTaxSetsByProp
 import { useRoomTypesByProperty } from '@/features/room-types/hooks/useRoomTypesByProperty';
 import { useRatePlansByRoomType } from '@/features/rate-plans/hooks/useRatePlansByRoomType';
 import { useChannexGroup } from '@/hooks/useChannexGroup';
-import { useChannexProperty } from '@/hooks/useChannexProperty';
 import { useUpdateGroup } from '@/features/groups/hooks/useUpdateGroup';
 import DropdownMenu from '../ui/DropdownMenu';
 
@@ -16,7 +15,7 @@ const ContextHeader: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const company = useCompany();
-  const { selectedGroup, groupId, companyId, selectedProperty, setPropertyId, propertyId, selectedTaxSet, setTaxSetId, taxSetId, selectedRoomType, setRoomTypeId, roomTypeId, selectedRatePlan, setRatePlanId, ratePlanId } = useAppContext();
+  const { selectedGroup, groupId, companyId, selectedProperty, setPropertyId, propertyId, selectedTaxSet, setTaxSetId, taxSetId, selectedRoomType, setRoomTypeId, roomTypeId, selectedRatePlan, setRatePlanId } = useAppContext();
 
   // Modal state for updating group in Channex
   const [showGroupModal, setShowGroupModal] = useState(false);
@@ -70,12 +69,6 @@ const ContextHeader: React.FC = () => {
     groupId: groupId || undefined,
   });
   const properties = propertiesData?.data || [];
-
-  // Check if property exists in Channex (needed for room type sync)
-  const { channexProperty } = useChannexProperty({
-    property: selectedProperty,
-    enabled: !!selectedProperty,
-  });
 
   // Fetch tax sets for the selected property
   const { data: taxSetsData, isLoading: isLoadingTaxSets } = useTaxSetsByProperty(propertyId || '');

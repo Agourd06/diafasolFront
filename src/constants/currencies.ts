@@ -38,9 +38,20 @@ export const getCurrencyName = (code: string): string => {
 /**
  * Format amount with currency
  */
-export const formatCurrency = (amount: number | string, currencyCode: string): string => {
+export const formatCurrency = (amount: number | string | null | undefined, currencyCode: string): string => {
   const symbol = getCurrencySymbol(currencyCode);
+  
+  // Handle null, undefined, or invalid values
+  if (amount === null || amount === undefined || amount === '') {
+    return `${symbol} 0.00`;
+  }
+  
   const numAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
+  
+  // Handle NaN or invalid numbers
+  if (isNaN(numAmount)) {
+    return `${symbol} 0.00`;
+  }
   
   // Format with 2 decimal places
   const formatted = numAmount.toFixed(2);

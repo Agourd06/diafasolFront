@@ -53,23 +53,23 @@ const ReviewForm: React.FC = () => {
             variant="secondary"
             className="text-sm"
           >
-            Edit
+            {t('common.edit', { defaultValue: 'Edit' })}
           </Button>
         </div>
         {booking && (
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <p className="text-gray-600">Status:</p>
+              <p className="text-gray-600">{t('bookings.labels.status', { defaultValue: 'Status' })}:</p>
               <p className="font-medium text-gray-900">{booking.status}</p>
             </div>
             <div>
-              <p className="text-gray-600">Dates:</p>
+              <p className="text-gray-600">{t('bookings.labels.dates', { defaultValue: 'Dates' })}:</p>
               <p className="font-medium text-gray-900">
                 {booking.arrivalDate} → {booking.departureDate}
               </p>
             </div>
             <div>
-              <p className="text-gray-600">Amount:</p>
+              <p className="text-gray-600">{t('bookings.labels.amount', { defaultValue: 'Amount' })}:</p>
               <p className="font-medium text-gray-900">
                 {formatCurrency(booking.amount, booking.currency || 'EUR')}
               </p>
@@ -96,22 +96,22 @@ const ReviewForm: React.FC = () => {
             variant="secondary"
             className="text-sm"
           >
-            Edit
+            {t('common.edit', { defaultValue: 'Edit' })}
           </Button>
         </div>
         <div className="space-y-3">
           {rooms.map((room, index) => (
             <div key={index} className="p-4 bg-gray-50 rounded-lg">
-              <p className="text-sm font-medium text-gray-900">Room {index + 1}</p>
+              <p className="text-sm font-medium text-gray-900">{t('bookings.messages.room', { defaultValue: 'Room' })} {index + 1}</p>
               <p className="text-xs text-gray-600 mt-1">
                 {room.checkinDate} → {room.checkoutDate}
               </p>
               <p className="text-xs text-gray-600">
-                Adults: {room.adults}, Children: {room.children}, Infants: {room.infants}
+                {t('bookings.labels.adults', { defaultValue: 'Adults' })}: {room.adults}, {t('bookings.labels.children', { defaultValue: 'Children' })}: {room.children}, {t('bookings.labels.infants', { defaultValue: 'Infants' })}: {room.infants}
               </p>
               {room.amount && (
                 <p className="text-xs text-gray-600">
-                  Amount: {formatCurrency(room.amount, booking.currency || 'EUR')}
+                  {t('bookings.labels.amount', { defaultValue: 'Amount' })}: {formatCurrency(room.amount, booking.currency || 'EUR')}
                 </p>
               )}
             </div>
@@ -132,7 +132,7 @@ const ReviewForm: React.FC = () => {
               variant="secondary"
               className="text-sm"
             >
-              Edit
+              {t('common.edit', { defaultValue: 'Edit' })}
             </Button>
           </div>
           <div className="space-y-2">
@@ -161,23 +161,23 @@ const ReviewForm: React.FC = () => {
               variant="secondary"
               className="text-sm"
             >
-              Edit
+              {t('common.edit', { defaultValue: 'Edit' })}
             </Button>
           </div>
           <div className="text-sm space-y-2">
             {guarantee.cardType && (
               <p className="text-gray-700">
-                <span className="font-medium">Card Type:</span> {guarantee.cardType}
+                <span className="font-medium">{t('bookings.labels.cardType', { defaultValue: 'Card Type' })}:</span> {guarantee.cardType}
               </p>
             )}
             {guarantee.cardHolderName && (
               <p className="text-gray-700">
-                <span className="font-medium">Card Holder:</span> {guarantee.cardHolderName}
+                <span className="font-medium">{t('bookings.labels.cardHolder', { defaultValue: 'Card Holder' })}:</span> {guarantee.cardHolderName}
               </p>
             )}
             {guarantee.maskedCardNumber && (
               <p className="text-gray-700 font-mono">
-                <span className="font-medium">Card:</span> {guarantee.maskedCardNumber}
+                <span className="font-medium">{t('bookings.labels.maskedCardNumber', { defaultValue: 'Card' })}:</span> {guarantee.maskedCardNumber}
               </p>
             )}
           </div>
@@ -197,28 +197,28 @@ const ReviewForm: React.FC = () => {
               variant="secondary"
               className="text-sm"
             >
-              Edit
+              {t('common.edit', { defaultValue: 'Edit' })}
             </Button>
           </div>
           <div className="text-sm space-y-2">
             {(guest.firstName || guest.lastName) && (
               <p className="text-gray-700">
-                <span className="font-medium">Name:</span> {guest.firstName} {guest.lastName}
+                <span className="font-medium">{t('bookings.labels.name', { defaultValue: 'Name' })}:</span> {guest.firstName} {guest.lastName}
               </p>
             )}
             {guest.email && (
               <p className="text-gray-700">
-                <span className="font-medium">Email:</span> {guest.email}
+                <span className="font-medium">{t('bookings.labels.email', { defaultValue: 'Email' })}:</span> {guest.email}
               </p>
             )}
             {guest.phone && (
               <p className="text-gray-700">
-                <span className="font-medium">Phone:</span> {guest.phone}
+                <span className="font-medium">{t('bookings.labels.phone', { defaultValue: 'Phone' })}:</span> {guest.phone}
               </p>
             )}
             {guest.address && (
               <p className="text-gray-700">
-                <span className="font-medium">Address:</span> {guest.address}, {guest.city} {guest.zip}, {guest.country}
+                <span className="font-medium">{t('bookings.labels.address', { defaultValue: 'Address' })}:</span> {guest.address}, {guest.city} {guest.zip}, {guest.country}
               </p>
             )}
           </div>
@@ -234,9 +234,9 @@ const ReviewForm: React.FC = () => {
             </svg>
           </div>
           <div className="flex-1">
-            <h4 className="text-lg font-semibold text-green-900">Booking Created Successfully!</h4>
+            <h4 className="text-lg font-semibold text-green-900">{t('bookings.review.success', { defaultValue: 'Booking Created Successfully!' })}</h4>
             <p className="text-sm text-green-700 mt-1">
-              Your booking has been created with ID: <span className="font-mono font-medium">{bookingId}</span>
+              {t('bookings.review.successMessage', { defaultValue: 'Your booking has been created with ID: {{id}}', id: bookingId })}
             </p>
           </div>
         </div>

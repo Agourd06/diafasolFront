@@ -85,6 +85,7 @@ const TestEventStorage = lazy(() => import("../features/event-messages/pages/Tes
 const BookingsListPage = lazy(() => import("../features/bookings/pages/BookingsListPage"));
 const BookingDetailsPage = lazy(() => import("../features/bookings/pages/BookingDetailsPage"));
 const CreateBookingPage = lazy(() => import("../features/bookings/pages/CreateBookingPage"));
+const ContinueBookingPage = lazy(() => import("../features/bookings/pages/ContinueBookingPage"));
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -115,6 +116,7 @@ const AppRoutes = () => {
           <Route path="/bookings" element={<BookingsListPage />} />
           <Route path="/bookings/create" element={<CreateBookingPage />} />
           <Route path="/bookings/:bookingId" element={<BookingDetailsPage />} />
+          <Route path="/bookings/:bookingId/continue" element={<ContinueBookingPage />} />
         <Route path="/companies" element={<CompaniesList />} />
         <Route path="/companies/create" element={<CreateCompany />} />
         <Route path="/facilities" element={<FacilitiesList />} />

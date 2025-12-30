@@ -91,7 +91,7 @@ const ServicesForm: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Service Type</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">{t('bookings.labels.serviceType', { defaultValue: 'Service Type' })}</label>
             <select
               name="serviceType"
               value={formData.serviceType}
@@ -107,7 +107,7 @@ const ServicesForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">{t('bookings.labels.name', { defaultValue: 'Name' })}</label>
             <input
               type="text"
               name="name"
@@ -118,7 +118,7 @@ const ServicesForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Price Mode</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">{t('bookings.labels.priceMode', { defaultValue: 'Price Mode' })}</label>
             <input
               type="text"
               name="priceMode"
@@ -129,7 +129,7 @@ const ServicesForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Persons</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">{t('bookings.labels.persons', { defaultValue: 'Persons' })}</label>
             <input
               type="number"
               name="persons"
@@ -141,7 +141,7 @@ const ServicesForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Nights</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">{t('bookings.labels.nights', { defaultValue: 'Nights' })}</label>
             <input
               type="number"
               name="nights"
@@ -153,7 +153,7 @@ const ServicesForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Price Per Unit</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">{t('bookings.labels.pricePerUnit', { defaultValue: 'Price Per Unit' })}</label>
             <input
               type="number"
               name="pricePerUnit"
@@ -166,7 +166,7 @@ const ServicesForm: React.FC = () => {
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Total Price</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">{t('bookings.labels.totalPrice', { defaultValue: 'Total Price' })}</label>
             <input
               type="number"
               name="totalPrice"
@@ -188,7 +188,7 @@ const ServicesForm: React.FC = () => {
             disabled={createServiceMutation.isPending}
             variant="secondary"
           >
-            + Add Service
+            {t('bookings.services.addService', { defaultValue: '+ Add Service' })}
           </Button>
         </div>
       </Card>
@@ -197,7 +197,7 @@ const ServicesForm: React.FC = () => {
       {services.length > 0 && (
         <Card className="p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            Added Services ({services.length})
+            {t('bookings.messages.addedServices', { defaultValue: 'Added Services' })} ({services.length})
           </h3>
           <div className="space-y-3">
             {services.map((service, index) => (
@@ -214,7 +214,7 @@ const ServicesForm: React.FC = () => {
                   variant="secondary"
                   className="text-red-600 hover:text-red-700"
                 >
-                  Remove
+                  {t('common.remove', { defaultValue: 'Remove' })}
                 </Button>
               </div>
             ))}

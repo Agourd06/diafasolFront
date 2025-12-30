@@ -52,27 +52,14 @@ const BookingsListPage: React.FC = () => {
   return (
     <div className="flex flex-col h-[calc(100vh-160px)] -m-6 p-6 space-y-3">
       {/* Header */}
-      <div className="flex items-center justify-between flex-shrink-0">
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => navigate('/dashboard')}
-            className="flex items-center justify-center gap-1.5 px-3 py-1.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors"
-            title={t('common.backToDashboard', { defaultValue: 'Back to Dashboard' })}
-          >
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            <span className="hidden sm:inline">{t('common.backToDashboard', { defaultValue: 'Back to Dashboard' })}</span>
-          </button>
-          <div>
-            <h1 className="text-xl font-bold text-slate-900">
-              {t('bookings.title', { defaultValue: 'Bookings' })}
-            </h1>
-            <p className="text-xs text-slate-600">
-              {t('bookings.subtitle', { defaultValue: 'Manage all your bookings' })}
-            </p>
-          </div>
+      <div className="flex items-center justify-between flex-shrink-0 pb-2">
+        <div>
+          <h1 className="text-xl font-bold text-slate-900">
+            {t('bookings.title', { defaultValue: 'Bookings' })}
+          </h1>
+          <p className="text-xs text-slate-600">
+            {t('bookings.subtitle', { defaultValue: 'Manage all your bookings' })}
+          </p>
         </div>
         <Button onClick={() => navigate('/bookings/create')}>
           {t('bookings.create.button', { defaultValue: '+ New Booking' })}
@@ -114,7 +101,7 @@ const BookingsListPage: React.FC = () => {
                 setSearchTerm(e.target.value);
                 setPage(1);
               }}
-              placeholder="Search by ID, OTA name, reservation code..."
+              placeholder={t('bookings.placeholders.search', { defaultValue: 'Search by ID, OTA name, reservation code...' })}
               className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -152,11 +139,13 @@ const BookingsListPage: React.FC = () => {
                 {bookingsData.data.map((booking) => (
                   <div
                     key={booking.id}
-                    onClick={() => handleRowClick(booking.id)}
-                    className="px-6 py-5 cursor-pointer hover:bg-slate-50 transition-colors"
+                    className="px-6 py-5 hover:bg-slate-50 transition-colors"
                   >
                     <div className="flex items-center justify-between gap-4">
-                      <div className="flex-1 min-w-0">
+                      <div 
+                        className="flex-1 min-w-0 cursor-pointer"
+                        onClick={() => handleRowClick(booking.id)}
+                      >
                         <div className="flex items-center gap-3 mb-2">
                           <span
                             className={`px-2 py-1 text-xs font-semibold rounded border ${getStatusColor(booking.status)}`}
@@ -194,9 +183,27 @@ const BookingsListPage: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/bookings/${booking.id}/continue`);
+                          }}
+                          className="px-3 py-1.5 text-sm font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
+                          title={t('bookings.messages.continueBookingCreation', { defaultValue: 'Continue booking creation' })}
+                        >
+                          {t('bookings.messages.continue', { defaultValue: 'Continue' })}
+                        </button>
+                        <svg 
+                          className="w-5 h-5 text-slate-400 cursor-pointer" 
+                          fill="none" 
+                          viewBox="0 0 24 24" 
+                          stroke="currentColor"
+                          onClick={() => handleRowClick(booking.id)}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -215,7 +222,7 @@ const BookingsListPage: React.FC = () => {
                 {t('common.previous', { defaultValue: 'Previous' })}
               </button>
               <span className="text-sm text-slate-600">
-                Page {page} of {bookingsData.meta.totalPages}
+                {t('common.page', { defaultValue: 'Page' })} {page} {t('common.of', { defaultValue: 'of' })} {bookingsData.meta.totalPages}
               </span>
               <button
                 onClick={() => setPage((p) => Math.min(bookingsData.meta.totalPages, p + 1))}

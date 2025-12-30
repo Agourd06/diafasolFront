@@ -63,14 +63,162 @@ export const createBooking = async (payload: CreateBookingPayload): Promise<Book
 };
 
 /**
+ * Transform snake_case API response to camelCase frontend format
+ */
+const transformBookingResponse = (apiResponse: any): CompleteBooking => {
+  const attrs = apiResponse.attributes || apiResponse;
+  
+  return {
+    id: attrs.id,
+    companyId: attrs.company_id || '',
+    propertyId: attrs.property_id,
+    status: attrs.status,
+    arrivalDate: attrs.arrival_date,
+    departureDate: attrs.departure_date,
+    amount: attrs.amount,
+    uniqueId: attrs.unique_id,
+    otaReservationCode: attrs.ota_reservation_code,
+    otaName: attrs.ota_name,
+    revisionId: attrs.revision_id,
+    arrivalHour: attrs.arrival_hour,
+    otaCommission: attrs.ota_commission,
+    currency: attrs.currency,
+    notes: attrs.notes,
+    insertedAt: attrs.inserted_at,
+    occupancy: attrs.occupancy,
+    createdAt: attrs.created_at || new Date().toISOString(),
+    updatedAt: attrs.updated_at || new Date().toISOString(),
+    
+    // Transform nested rooms
+    rooms: attrs.rooms?.map((room: any) => {
+      console.log('🔄 Transforming room:', { rawRoom: room, roomId: room.id });
+      return {
+        id: room.id || '', // Keep empty string if no ID (will be handled in context)
+        bookingId: attrs.id,
+        roomTypeId: room.room_type_id,
+        ratePlanId: room.rate_plan_id,
+      guestsCount: room.guests_count || 0,
+      adults: room.occupancy?.adults || room.adults || 0,
+      children: room.occupancy?.children || room.children || 0,
+      infants: room.occupancy?.infants || room.infants || 0,
+      checkinDate: room.checkin_date,
+      checkoutDate: room.checkout_date,
+      stopSell: room.stop_sell || false,
+      amount: room.amount,
+      otaUniqueId: room.ota_unique_id,
+      createdAt: room.created_at || new Date().toISOString(),
+      updatedAt: room.updated_at || new Date().toISOString(),
+      // Transform room days
+      days: room.days ? Object.entries(room.days).map(([date, amount]) => ({
+        id: `${room.id}-${date}`,
+        bookingRoomId: room.id || '',
+        date,
+        amount: String(amount),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      })) : [],
+      };
+    }) || [],
+    
+    // Transform services
+    services: attrs.services?.map((service: any, index: number) => ({
+      id: service.id || `service-${index}`,
+      bookingId: attrs.id,
+      type: service.type,
+      totalPrice: service.total_price,
+      pricePerUnit: service.price_per_unit,
+      priceMode: service.price_mode,
+      persons: service.persons,
+      nights: service.nights,
+      name: service.name,
+      createdAt: service.created_at || new Date().toISOString(),
+      updatedAt: service.updated_at || new Date().toISOString(),
+    })) || [],
+    
+    // Transform guarantee (only first one)
+    guarantees: attrs.guarantee ? [{
+      ...(attrs.guarantee.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(attrs.guarantee.id) && { id: attrs.guarantee.id }),
+      bookingId: attrs.id,
+      cardType: attrs.guarantee.card_type,
+      cardHolderName: attrs.guarantee.cardholder_name,
+      maskedCardNumber: attrs.guarantee.card_number,
+      expirationDate: attrs.guarantee.expiration_date,
+      createdAt: attrs.guarantee.created_at || new Date().toISOString(),
+      updatedAt: attrs.guarantee.updated_at || new Date().toISOString(),
+    }] : [],
+    
+    // Transform guest data from customer field (API returns first guest as customer object)
+    // Note: API returns customer field (not guests array), mapping fields:
+    // - customer.name → firstName
+    // - customer.surname → lastName  
+    // - customer.mail → email
+    // - customer.company.title → companyName
+    guests: attrs.customer ? [{
+      id: attrs.customer.id || 'guest-1',
+      companyId: attrs.company_id || '',
+      bookingId: attrs.id,
+      firstName: attrs.customer.name || null,
+      lastName: attrs.customer.surname || null,
+      email: attrs.customer.mail || null,
+      phone: attrs.customer.phone || null,
+      address: attrs.customer.address || null,
+      city: attrs.customer.city || null,
+      zip: attrs.customer.zip || null,
+      country: attrs.customer.country || null,
+      language: attrs.customer.language || null,
+      companyName: attrs.customer.company?.title || null,
+      companyNumber: attrs.customer.company?.number || null,
+      companyNumberType: attrs.customer.company?.number_type || null,
+      companyType: attrs.customer.company?.type || null,
+      createdAt: attrs.customer.created_at || new Date().toISOString(),
+      updatedAt: attrs.customer.updated_at || new Date().toISOString(),
+    }] : [],
+    
+    // Create singular guest property for convenience (maps from customer field)
+    guest: attrs.customer ? {
+      id: attrs.customer.id || 'guest-1',
+      companyId: attrs.company_id || '',
+      bookingId: attrs.id,
+      firstName: attrs.customer.name || null,
+      lastName: attrs.customer.surname || null,
+      email: attrs.customer.mail || null,
+      phone: attrs.customer.phone || null,
+      address: attrs.customer.address || null,
+      city: attrs.customer.city || null,
+      zip: attrs.customer.zip || null,
+      country: attrs.customer.country || null,
+      language: attrs.customer.language || null,
+      companyName: attrs.customer.company?.title || null,
+      companyNumber: attrs.customer.company?.number || null,
+      companyNumberType: attrs.customer.company?.number_type || null,
+      companyType: attrs.customer.company?.type || null,
+      createdAt: attrs.customer.created_at || new Date().toISOString(),
+      updatedAt: attrs.customer.updated_at || new Date().toISOString(),
+    } : null,
+    
+    // Revisions array (empty for now, would need separate API call)
+    revisions: [],
+  };
+};
+
+/**
  * Get a single booking by ID (with nested data)
  */
 export const getBookingById = async (id: string): Promise<CompleteBooking> => {
   try {
-    const response = await axiosClient.get<CompleteBooking>(`${BASE_URL}/${id}`);
-    return response.data;
+    console.log('📤 Fetching booking:', id);
+    const response = await axiosClient.get(`${BASE_URL}/${id}`);
+    console.log('📥 Raw API response:', response.data);
+    
+    const transformed = transformBookingResponse(response.data);
+    console.log('✅ Transformed booking:', transformed);
+    
+    return transformed;
   } catch (error: any) {
     console.error('❌ Error fetching booking:', error);
+    if (error.response?.data) {
+      console.error('Response data:', error.response.data);
+    }
     throw error;
   }
 };

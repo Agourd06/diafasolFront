@@ -162,7 +162,10 @@
     "actions": "Actions",
     "remove": "Remove",
     "add": "Add",
-    "close": "Close"
+    "close": "Close",
+    "skip": "Skip",
+    "page": "Page",
+    "of": "of"
   },
   "dashboard": {
     "welcome": "Dashboard",
@@ -2117,6 +2120,252 @@
       "clear": "Clear filters",
       "allRoomTypes": "All room types",
       "allRatePlans": "All rate plans"
+    }
+  },
+  "bookings": {
+    "title": "Bookings",
+    "subtitle": "Manage all your bookings",
+    "create": {
+      "title": "Create New Booking",
+      "subtitle": "Follow the steps to create a complete booking",
+      "button": "+ New Booking"
+    },
+    "list": {
+      "title": "All Bookings",
+      "empty": "No bookings found",
+      "total": "bookings"
+    },
+    "filters": {
+      "status": "Status",
+      "search": "Search"
+    },
+    "details": {
+      "title": "Booking Details",
+      "notFound": "Booking not found",
+      "backToList": "Back to Bookings",
+      "bookingInfo": "Booking Information",
+      "rooms": "Rooms",
+      "services": "Services",
+      "guarantee": "Payment Guarantee",
+      "guest": "Guest Information"
+    },
+    "form": {
+      "property": "Property",
+      "selectProperty": "Select a property",
+      "status": "Status",
+      "arrivalDate": "Arrival Date",
+      "departureDate": "Departure Date",
+      "amount": "Amount",
+      "currency": "Currency",
+      "uniqueId": "Unique ID",
+      "otaReservationCode": "OTA Reservation Code",
+      "otaName": "OTA Name",
+      "arrivalHour": "Arrival Hour",
+      "otaCommission": "OTA Commission",
+      "occupancy": "Occupancy",
+      "notes": "Notes"
+    },
+    "rooms": {
+      "addRoom": "Add Room",
+      "editRoom": "Edit Room",
+      "updateRoom": "Update Room",
+      "selectRoomType": "Select a room type",
+      "selectRatePlan": "Select a rate plan",
+      "addedRooms": "Added Rooms",
+      "unknownRoomType": "Unknown Room Type",
+      "unknownRatePlan": "Unknown Rate Plan"
+    },
+    "services": {
+      "addService": "Add Service"
+    },
+    "guarantee": {
+      "title": "Payment Guarantee"
+    },
+    "guest": {
+      "title": "Guest Information"
+    },
+    "review": {
+      "bookingInfo": "Booking Information",
+      "rooms": "Rooms",
+      "services": "Services",
+      "guarantee": "Payment Guarantee",
+      "guest": "Guest Information",
+      "viewBooking": "View Booking Details",
+      "success": "Booking Created Successfully!",
+      "successMessage": "Your booking has been created with ID: {{id}}"
+    },
+    "steps": {
+      "1": {
+        "label": "Booking Info",
+        "description": "Basic booking details"
+      },
+      "2": {
+        "label": "Rooms",
+        "description": "Add rooms to booking"
+      },
+      "3": {
+        "label": "Room Days",
+        "description": "Daily pricing breakdown"
+      },
+      "4": {
+        "label": "Services",
+        "description": "Additional services"
+      },
+      "5": {
+        "label": "Guarantee",
+        "description": "Payment guarantee"
+      },
+      "6": {
+        "label": "Guest Info",
+        "description": "Customer details"
+      },
+      "7": {
+        "label": "Review",
+        "description": "Review and confirm"
+      }
+    },
+    "labels": {
+      "roomType": "Room Type",
+      "ratePlan": "Rate Plan",
+      "checkinDate": "Check-in Date",
+      "checkoutDate": "Check-out Date",
+      "adults": "Adults",
+      "children": "Children",
+      "infants": "Infants",
+      "occupancy": "Occupancy",
+      "occupancyHelper": "at least one guest required",
+      "amount": "Amount",
+      "otaUniqueId": "OTA Unique ID",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "language": "Language",
+      "country": "Country",
+      "address": "Address",
+      "city": "City",
+      "zip": "ZIP/Postal Code",
+      "companyName": "Company Name",
+      "companyNumber": "Company Number",
+      "companyNumberType": "Company Number Type",
+      "companyType": "Company Type",
+      "companyInfo": "Company Information (Optional)",
+      "cardType": "Card Type",
+      "cardHolderName": "Card Holder Name",
+      "maskedCardNumber": "Masked Card Number",
+      "expirationDate": "Expiration Date",
+      "serviceType": "Service Type",
+      "name": "Name",
+      "priceMode": "Price Mode",
+      "persons": "Persons",
+      "nights": "Nights",
+      "pricePerUnit": "Price Per Unit",
+      "totalPrice": "Total Price",
+      "status": "Status",
+      "dates": "Dates",
+      "created": "Created",
+      "checkin": "Check-in",
+      "checkout": "Check-out",
+      "property": "Property",
+      "uniqueId": "Unique ID",
+      "otaReservationCode": "OTA Reservation Code",
+      "otaName": "OTA Name",
+      "arrivalHour": "Arrival Hour",
+      "otaCommission": "OTA Commission",
+      "createdAt": "Created At",
+      "notes": "Notes",
+      "dailyRates": "Daily Rates",
+      "cardHolder": "Card Holder"
+    },
+    "placeholders": {
+      "uniqueId": "BDC-1556013801",
+      "otaName": "Booking.com",
+      "notes": "Additional notes...",
+      "firstName": "User",
+      "lastName": "Channex",
+      "email": "user@channex.io",
+      "phone": "1234567890",
+      "language": "en",
+      "country": "NL",
+      "address": "JW Lucasweg 35",
+      "city": "Haarlem",
+      "zip": "2031 BE",
+      "companyName": "Company Name",
+      "companyNumber": "1123331",
+      "cardHolderName": "Channex User",
+      "maskedCardNumber": "411111******1111",
+      "expirationDate": "10/2020",
+      "price": "Price",
+      "search": "Search by ID, OTA name, reservation code...",
+      "amount": "200.00",
+      "otaUniqueId": "49"
+    },
+    "helpers": {
+      "amountFormat": "Enter a positive number with up to 2 decimal places",
+      "uniqueIdFormat": "Format: ABC-123456 (e.g., BDC-1556013801)",
+      "otaReservationCodeFormat": "Numbers only",
+      "otaCommissionFormat": "Enter a positive number with up to 2 decimal places",
+      "amountOptional": "Optional: Enter amount with up to 2 decimal places",
+      "otaUniqueIdOptional": "Optional: Enter a numeric OTA unique identifier",
+      "dateRange": "Must be between {{start}} and {{end}}",
+      "phoneFormat": "Format: digits, spaces, -, +, parentheses",
+      "languageFormat": "2-letter language code (ISO 639-1, e.g., en, fr, es)",
+      "countryFormat": "2-letter country code (ISO 3166-1 alpha-2, e.g., US, GB, FR)",
+      "companyNumberRequired": "Required when company name is provided",
+      "securityNote": "⚠️ Security Note: CVV is never stored for PCI compliance. Only enter masked card numbers."
+    },
+    "errors": {
+      "noBookingId": "Error: No booking ID found. Please go back to Step 1 and create a booking first.",
+      "invalidBookingId": "Error: Invalid booking ID format: {{id}}. Please go back to Step 1 and create a booking first.",
+      "bookingCreatedNoId": "Error: Booking was created but no ID was returned. Please try again.",
+      "createBookingFailed": "Failed to create booking: {{message}}",
+      "cannotUpdateRoom": "Error: Cannot update room. Room ID is missing.",
+      "addRoomRequired": "Please add at least one room",
+      "roomIdMissing": "Error: Cannot save room days. Room ID is missing for Room {{roomNumber}}.\n\nPlease ensure the room is saved first.",
+      "saveGuaranteeFailed": "Failed to save guarantee. {{message}}",
+      "saveGuestFailed": "Failed to save guest. Please check console for details.",
+      "cardHolderNameRequired": "Card holder name is required",
+      "maskedCardNumberInvalid": "Invalid format (e.g., 411111******1111)"
+    },
+    "alerts": {
+      "deleteRoom": "Are you sure you want to delete this room?",
+      "roomDaysAlreadyConfigured": "Room {{roomNumber}} already has {{count}} day(s) configured.\n\nDo you want to add additional days? This will create duplicate entries."
+    },
+    "messages": {
+      "loadingBooking": "Loading booking...",
+      "failedToLoadBooking": "Failed to load booking",
+      "continueBooking": "Continue Booking",
+      "continueBookingDesc": "Continue creating booking: {{id}}",
+      "backToBookings": "Back to Bookings",
+      "loadingRooms": "Loading rooms...",
+      "noRoomsAdded": "No rooms added yet. Please go back and add rooms first.",
+      "backToRooms": "Back to Rooms",
+      "room": "Room",
+      "of": "of",
+      "dailyPricing": "Daily Pricing",
+      "daysAlreadyConfigured": "✓ {{count}} day(s) already configured for this room",
+      "total": "Total",
+      "saveAndNextRoom": "Save & Next Room",
+      "updateAndNextRoom": "Update & Next Room",
+      "addedServices": "Added Services",
+      "continue": "Continue",
+      "continueBookingCreation": "Continue booking creation"
+    },
+    "details": {
+      "property": "Property",
+      "arrivalDate": "Arrival Date",
+      "departureDate": "Departure Date",
+      "uniqueId": "Unique ID",
+      "otaReservationCode": "OTA Reservation Code",
+      "otaName": "OTA Name",
+      "arrivalHour": "Arrival Hour",
+      "otaCommission": "OTA Commission",
+      "occupancy": "Occupancy",
+      "createdAt": "Created At",
+      "checkin": "Check-in",
+      "checkout": "Check-out",
+      "otaUniqueId": "OTA Unique ID",
+      "cardType": "Card Type"
     }
   }
 }

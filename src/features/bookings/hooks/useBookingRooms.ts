@@ -1,34 +1,20 @@
 /**
  * Booking Rooms Hooks
  * 
- * React Query hooks for managing booking rooms
+ * React Query hooks for managing booking rooms (update and delete)
+ * Note: useCreateBookingRoom is exported from useBookingMutations.ts
  */
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
-  createBookingRoom,
   updateBookingRoom,
   deleteBookingRoom,
+  getBookingRoomsByBookingId,
 } from '../api';
 import type {
-  CreateBookingRoomPayload,
   UpdateBookingRoomPayload,
-} from '../types';
-
-/**
- * Create a new booking room
- */
-export const useCreateBookingRoom = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: (payload: CreateBookingRoomPayload) => createBookingRoom(payload),
-    onSuccess: (_, variables) => {
-      // Invalidate the parent booking to refetch with new room
-      queryClient.invalidateQueries({ queryKey: ['booking', variables.bookingId] });
-    },
-  });
-};
+  GetBookingRoomsParams,
+} from '../api/booking-rooms.api';
 
 /**
  * Update a booking room
@@ -56,7 +42,22 @@ export const useDeleteBookingRoom = () => {
     mutationFn: (id: string) => deleteBookingRoom(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bookings'] });
+      queryClient.invalidateQueries({ queryKey: ['bookingRooms'] });
     },
+  });
+};
+
+/**
+ * Get all booking rooms for a booking
+ */
+export const useBookingRoomsByBookingId = (
+  params: GetBookingRoomsParams,
+  enabled: boolean = true
+) => {
+  return useQuery({
+    queryKey: ['bookingRooms', 'booking', params.bookingId, params.includeDays],
+    queryFn: () => getBookingRoomsByBookingId(params),
+    enabled: enabled && !!params.bookingId,
   });
 };
 
