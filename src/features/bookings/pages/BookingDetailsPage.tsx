@@ -7,9 +7,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { useBooking } from '../hooks';
 import { useAppContext } from '@/hooks/useAppContext';
 import { formatCurrency } from '@/constants/currencies';
+import { getBookingGuestsByBookingId } from '../api/booking-guests.api';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Loader from '@/components/Loader';
@@ -22,6 +24,13 @@ const BookingDetailsPage: React.FC = () => {
 
   const { data: booking, isLoading, error } = useBooking(bookingId || null);
   const { selectedProperty, selectedRoomType, selectedRatePlan } = useAppContext();
+
+  // Fetch all guests for this booking
+  const { data: allGuests = [] } = useQuery({
+    queryKey: ['bookingGuests', bookingId],
+    queryFn: () => getBookingGuestsByBookingId(bookingId!),
+    enabled: !!bookingId,
+  });
 
   const getStatusColor = (status: string) => {
     return STATUS_COLORS[status as keyof typeof STATUS_COLORS] || 'bg-gray-100 text-gray-800 border-gray-300';
@@ -43,7 +52,12 @@ const BookingDetailsPage: React.FC = () => {
     return `Room Type (${roomTypeId.substring(0, 8)}...)`;
   };
   
-  const getRatePlanName = (ratePlanId: string) => {
+  const getRatePlanName = (ratePlanId: string | null | undefined) => {
+    // Handle null/undefined rate plan (for direct bookings without rate plan assigned yet)
+    if (!ratePlanId) {
+      return t('bookings.details.noRatePlan', { defaultValue: 'No rate plan assigned' });
+    }
+    
     // If viewing the currently selected rate plan, show its title
     if (selectedRatePlan?.id === ratePlanId) {
       return selectedRatePlan.title;
@@ -316,13 +330,104 @@ const BookingDetailsPage: React.FC = () => {
         </Card>
       )}
 
-      {/* Guest */}
-      {booking.guest && (
+      {/* Guests */}
+      {(allGuests.length > 0 || booking.guest) && (
         <Card className="p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            {t('bookings.details.guest', { defaultValue: 'Guest Information' })}
+            {t('bookings.details.guests', { defaultValue: 'Guest Information' })} 
+            {allGuests.length > 0 && ` (${allGuests.length})`}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          {/* Show all guests from API if available */}
+          {allGuests.length > 0 ? (
+            <div className="space-y-4">
+              {allGuests.map((guest, index) => (
+                <div key={guest.id || `guest-${index}`} className="p-4 bg-gray-50 rounded-lg">
+                  {allGuests.length > 1 && (
+                    <h3 className="text-sm font-semibold text-gray-700 mb-3">
+                      {t('bookings.details.guest', { defaultValue: 'Guest' })} {index + 1}
+                    </h3>
+                  )}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {(guest.firstName || guest.lastName) && (
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          {t('bookings.form.firstName', { defaultValue: 'First Name' })}
+                        </p>
+                        <p className="text-sm font-medium text-gray-900">{guest.firstName || '-'}</p>
+                      </div>
+                    )}
+                    {(guest.firstName || guest.lastName) && (
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          {t('bookings.form.lastName', { defaultValue: 'Last Name' })}
+                        </p>
+                        <p className="text-sm font-medium text-gray-900">{guest.lastName || '-'}</p>
+                      </div>
+                    )}
+                    {guest.email && (
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          {t('bookings.form.email', { defaultValue: 'Email' })}
+                        </p>
+                        <p className="text-sm font-medium text-gray-900">{guest.email}</p>
+                      </div>
+                    )}
+                    {guest.phone && (
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          {t('bookings.form.phone', { defaultValue: 'Phone' })}
+                        </p>
+                        <p className="text-sm font-medium text-gray-900">{guest.phone}</p>
+                      </div>
+                    )}
+                    {guest.language && (
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          {t('bookings.form.language', { defaultValue: 'Language' })}
+                        </p>
+                        <p className="text-sm font-medium text-gray-900">{guest.language}</p>
+                      </div>
+                    )}
+                    {guest.country && (
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          {t('bookings.form.country', { defaultValue: 'Country' })}
+                        </p>
+                        <p className="text-sm font-medium text-gray-900">{guest.country}</p>
+                      </div>
+                    )}
+                    {(guest.address || guest.city || guest.zip) && (
+                      <div className="md:col-span-2 lg:col-span-3">
+                        <p className="text-xs text-gray-500 mb-1">
+                          {t('bookings.form.address', { defaultValue: 'Address' })}
+                        </p>
+                        <p className="text-sm font-medium text-gray-900">
+                          {guest.address}
+                          {guest.city && `, ${guest.city}`}
+                          {guest.zip && ` ${guest.zip}`}
+                          {guest.country && `, ${guest.country}`}
+                        </p>
+                      </div>
+                    )}
+                    {guest.companyName && (
+                      <div className="md:col-span-2 lg:col-span-3">
+                        <p className="text-xs text-gray-500 mb-1">
+                          {t('bookings.form.companyName', { defaultValue: 'Company' })}
+                        </p>
+                        <p className="text-sm font-medium text-gray-900">
+                          {guest.companyName}
+                          {guest.companyNumber && ` (${guest.companyNumberType || ''}: ${guest.companyNumber})`}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : booking.guest ? (
+            // Fallback to single guest from booking object
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {(booking.guest.firstName || booking.guest.lastName) && (
               <div>
                 <p className="text-xs text-gray-500 mb-1">{t('bookings.labels.firstName', { defaultValue: 'First Name' })}</p>
@@ -379,7 +484,8 @@ const BookingDetailsPage: React.FC = () => {
                 </p>
               </div>
             )}
-          </div>
+            </div>
+          ) : null}
         </Card>
       )}
     </div>

@@ -2182,7 +2182,11 @@
       "title": "Payment Guarantee"
     },
     "guest": {
-      "title": "Guest Information"
+      "title": "Guest Information",
+      "addGuest": "+ Add Guest",
+      "editGuest": "Edit Guest",
+      "updateGuest": "Update Guest",
+      "addedGuests": "Added Guests"
     },
     "review": {
       "bookingInfo": "Booking Information",
@@ -2324,17 +2328,22 @@
       "roomIdMissing": "Error: Cannot save room days. Room ID is missing for Room {{roomNumber}}.\n\nPlease ensure the room is saved first.",
       "saveGuaranteeFailed": "Failed to save guarantee. {{message}}",
       "saveGuestFailed": "Failed to save guest. Please check console for details.",
+      "cannotUpdateGuest": "Error: Cannot update guest. Guest ID is missing.",
+      "atLeastOneGuest": "Please add at least one guest before proceeding.",
       "cardHolderNameRequired": "Card holder name is required",
       "maskedCardNumberInvalid": "Invalid format (e.g., 411111******1111)"
     },
     "alerts": {
       "deleteRoom": "Are you sure you want to delete this room?",
+      "deleteGuest": "Are you sure you want to delete this guest?",
       "roomDaysAlreadyConfigured": "Room {{roomNumber}} already has {{count}} day(s) configured.\n\nDo you want to add additional days? This will create duplicate entries."
     },
     "messages": {
       "loadingBooking": "Loading booking...",
       "failedToLoadBooking": "Failed to load booking",
       "continueBooking": "Continue Booking",
+      "guest": "Guest",
+      "room": "Room",
       "continueBookingDesc": "Continue creating booking: {{id}}",
       "backToBookings": "Back to Bookings",
       "loadingRooms": "Loading rooms...",
@@ -2365,7 +2374,68 @@
       "checkin": "Check-in",
       "checkout": "Check-out",
       "otaUniqueId": "OTA Unique ID",
-      "cardType": "Card Type"
+      "cardType": "Card Type",
+      "noRatePlan": "No rate plan assigned"
+    }
+  },
+  "roomSearch": {
+    "title": "Search for Available Rooms",
+    "subtitle": "Find the perfect room for your stay",
+    "form": {
+      "title": "Search Criteria",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "numberOfRooms": "Number of Rooms",
+      "companions": "Companions",
+      "adults": "Adults",
+      "adultsDescription": "18+ years",
+      "children": "Children",
+      "childrenDescription": "2-17 years",
+      "infants": "Infants",
+      "infantsDescription": "Under 2",
+      "searchButton": "Search Rooms"
+    },
+    "results": {
+      "title": "Available Rooms",
+      "error": "Error loading rooms",
+      "noSearch": "Enter search criteria",
+      "noSearchDescription": "Please fill in the search form to find available rooms.",
+      "noProperty": "No property selected",
+      "noPropertyDescription": "Please select a property first to search for available rooms.",
+      "noRooms": "No rooms available",
+      "noRoomsDescription": "Please adjust your search criteria or try different dates.",
+      "count": "Found {{count}} room(s)"
+    },
+    "room": {
+      "occupancy": "Occupancy",
+      "adults": "Adults",
+      "children": "Children",
+      "infants": "Infants",
+      "capacity": "Capacity",
+      "availableRooms": "Available",
+      "roomKind": "Room Kind",
+      "photos": "photos"
+    },
+    "booking": {
+      "created": "Booking created successfully!",
+      "error": "Failed to create booking",
+      "noRoomsSelected": "Please select at least one room",
+      "roomCountMismatch": "Please select exactly {{count}} room(s)",
+      "noProperty": "Please select a property first to create a booking.",
+      "differentProperty": "All rooms must be from the same property. Please select rooms from {{property}}.",
+      "invalidRoomTypes": "Some selected room types are no longer available. Please refresh and try again.",
+      "summary": "Selected Rooms",
+      "total": "Total",
+      "room": "room",
+      "rooms": "rooms",
+      "selected": "selected",
+      "selectRooms": "Select Rooms",
+      "createButton": "Create Booking",
+      "creating": "Creating Booking...",
+      "selectAllRooms": "Please select {{count}} room(s) to continue"
+    },
+    "results": {
+      "selected": "selected"
     }
   }
 }

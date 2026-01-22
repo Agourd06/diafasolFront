@@ -5,4 +5,5 @@
 export * from './useBookings';
 export * from './useBookingMutations';
 export * from './useBookingRooms';
+export * from './useBookingGuests';
 

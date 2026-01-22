@@ -10,8 +10,12 @@ type Props = {
 };
 
 const Card: React.FC<Props> = ({ children, className, title, subtitle, actions }) => {
+  // Check if className contains background or border classes
+  const hasCustomStyling = className && (className.includes('bg-') || className.includes('border-'));
+  const defaultStyles = hasCustomStyling ? "" : "bg-white ring-slate-100";
+  
   return (
-    <div className={clsx("rounded-2xl bg-white p-6 shadow-soft ring-1 ring-slate-100", className)}>
+    <div className={clsx("rounded-2xl p-6 shadow-soft ring-1", defaultStyles, className)}>
       {(title || subtitle || actions) && (
         <div className="mb-4 flex items-start justify-between gap-4">
           <div>

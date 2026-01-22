@@ -1,26 +1,49 @@
 /**
  * Guest Form - Step 6
  * 
- * Add customer/guest information
+ * Add customer/guest information (follows RoomsForm pattern)
  */
 
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useCreateBookingGuest } from '../../hooks/useBookingMutations';
-import { updateBookingGuest } from '../../api/booking-guests.api';
+import { useUpdateBookingGuest, useDeleteBookingGuest } from '../../hooks/useBookingGuests';
+import { getBookingGuestsByBookingId } from '../../api/booking-guests.api';
 import { useBookingWizard } from '../../context/BookingWizardContext';
 import { validateGuestForm } from '../../validation';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import type { CreateBookingGuestPayload } from '../../types';
 
 const GuestForm: React.FC = () => {
   const { t } = useTranslation();
-  const queryClient = useQueryClient();
-  const { bookingId, setGuest, markStepCompleted, setCurrentStep, guest: existingGuest } = useBookingWizard();
+  const { 
+    bookingId, 
+    addGuest, 
+    updateGuest, 
+    removeGuest, 
+    markStepCompleted, 
+    setCurrentStep, 
+    guests,
+    booking 
+  } = useBookingWizard();
   const createGuestMutation = useCreateBookingGuest();
+  const updateGuestMutation = useUpdateBookingGuest();
+  const deleteGuestMutation = useDeleteBookingGuest();
 
-  const [formData, setFormData] = useState({
+  // Fetch existing guests from API when in continue mode
+  const { data: apiGuestsData = [] } = useQuery({
+    queryKey: ['bookingGuests', bookingId],
+    queryFn: () => getBookingGuestsByBookingId(bookingId!),
+    enabled: !!bookingId,
+  });
+
+  // Use API guests if available (continue mode), otherwise use wizard state guests
+  const displayedGuests = apiGuestsData.length > 0 ? apiGuestsData : guests;
+
+  // Initialize form state
+  const [formData, setFormData] = useState<Omit<CreateBookingGuestPayload, 'bookingId'>>({
     firstName: '',
     lastName: '',
     email: '',
@@ -37,42 +60,104 @@ const GuestForm: React.FC = () => {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [existingGuestId, setExistingGuestId] = useState<string | null>(null);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
-  // Load existing guest data when component mounts or guest changes
+  // Load guest data when editing
   useEffect(() => {
-    if (existingGuest) {
-      // Check if guest has a valid UUID ID (not a placeholder like 'guest-1')
-      const guestId = (existingGuest as any).id;
-      const isValidUUID = guestId &&
-        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(guestId);
+    if (editingIndex !== null && displayedGuests[editingIndex]) {
+      const guest = displayedGuests[editingIndex];
+      setFormData({
+        firstName: guest.firstName || '',
+        lastName: guest.lastName || '',
+        email: guest.email || '',
+        phone: guest.phone || '',
+        language: guest.language || 'en',
+        country: guest.country || '',
+        city: guest.city || '',
+        address: guest.address || '',
+        zip: guest.zip || '',
+        companyName: guest.companyName || '',
+        companyNumber: guest.companyNumber || '',
+        companyNumberType: guest.companyNumberType || 'VAT',
+        companyType: guest.companyType || 'Registration Number',
+      });
+    }
+  }, [editingIndex, displayedGuests]);
 
-      if (isValidUUID) {
-        setExistingGuestId(guestId);
-        console.log('✅ Found existing guest ID:', guestId);
+  const validate = (): boolean => {
+    const validationErrors = validateGuestForm(formData);
+    setErrors(validationErrors);
+    return Object.keys(validationErrors).length === 0;
+  };
+
+  const handleAddGuest = async () => {
+    if (!bookingId) {
+      console.error('No booking ID available');
+      return;
+    }
+
+    if (!validate()) {
+      return;
+    }
+
+    try {
+      const payload: CreateBookingGuestPayload = {
+        bookingId,
+        ...formData,
+      };
+
+      if (editingIndex !== null) {
+        // Update existing guest
+        const existingGuest = displayedGuests[editingIndex];
+        const guestId = (existingGuest as any)?.id;
+        
+        if (!guestId) {
+          console.error('No guest ID available for update');
+          alert(t('bookings.errors.cannotUpdateGuest', { defaultValue: 'Error: Cannot update guest. Guest ID is missing.' }));
+          return;
+        }
+
+        await updateGuestMutation.mutateAsync({
+          id: guestId,
+          payload: {
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            language: formData.language,
+            country: formData.country,
+            city: formData.city,
+            address: formData.address,
+            zip: formData.zip,
+            companyName: formData.companyName,
+            companyNumber: formData.companyNumber,
+            companyNumberType: formData.companyNumberType,
+            companyType: formData.companyType,
+          },
+        });
+
+        // Update in wizard state
+        const updatedGuest: any = {
+          ...payload,
+        };
+        if (existingGuest && 'id' in existingGuest && existingGuest.id) {
+          updatedGuest.id = existingGuest.id;
+        }
+        updateGuest(editingIndex, updatedGuest);
+        setEditingIndex(null);
       } else {
-        setExistingGuestId(null);
-        console.log('⚠️ Existing guest has invalid or no ID:', guestId);
+        // Create new guest
+        const result = await createGuestMutation.mutateAsync(payload);
+        
+        // Add to wizard state with the ID
+        const guestWithId = {
+          ...payload,
+          id: result.id,
+        };
+        addGuest(guestWithId);
       }
 
-      // Load form data from existing guest
-      setFormData({
-        firstName: existingGuest.firstName || '',
-        lastName: existingGuest.lastName || '',
-        email: existingGuest.email || '',
-        phone: existingGuest.phone || '',
-        language: existingGuest.language || 'en',
-        country: existingGuest.country || '',
-        city: existingGuest.city || '',
-        address: existingGuest.address || '',
-        zip: existingGuest.zip || '',
-        companyName: existingGuest.companyName || '',
-        companyNumber: existingGuest.companyNumber || '',
-        companyNumberType: existingGuest.companyNumberType || 'VAT',
-        companyType: existingGuest.companyType || 'Registration Number',
-      });
-    } else {
-      // Reset form if no guest
+      // Reset form
       setFormData({
         firstName: '',
         lastName: '',
@@ -88,95 +173,62 @@ const GuestForm: React.FC = () => {
         companyNumberType: 'VAT',
         companyType: 'Registration Number',
       });
-      setExistingGuestId(null);
+    } catch (error) {
+      console.error('Failed to save guest:', error);
     }
-  }, [existingGuest]);
-
-  const validate = (): boolean => {
-    const validationErrors = validateGuestForm(formData);
-    setErrors(validationErrors);
-    return Object.keys(validationErrors).length === 0;
   };
 
-  const handleSave = async () => {
-    if (!bookingId) {
-      console.error('No booking ID available');
+  const handleEditGuest = (index: number) => {
+    setEditingIndex(index);
+  };
+
+  const handleDeleteGuest = async (index: number) => {
+    if (!window.confirm(t('bookings.alerts.deleteGuest', { defaultValue: 'Are you sure you want to delete this guest?' }))) {
       return;
     }
 
-    if (!validate()) {
+    const guest = displayedGuests[index];
+    const guestId = (guest as any)?.id;
+    
+    if (guestId) {
+      try {
+        await deleteGuestMutation.mutateAsync(guestId);
+        removeGuest(index);
+      } catch (error) {
+        console.error('Failed to delete guest:', error);
+      }
+    } else {
+      // If no guest ID, just remove from state (not yet saved)
+      removeGuest(index);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingIndex(null);
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      language: 'en',
+      country: '',
+      city: '',
+      address: '',
+      zip: '',
+      companyName: '',
+      companyNumber: '',
+      companyNumberType: 'VAT',
+      companyType: 'Registration Number',
+    });
+  };
+
+  const handleNext = () => {
+    if (displayedGuests.length === 0) {
+      alert(t('bookings.errors.atLeastOneGuest', { defaultValue: 'Please add at least one guest before proceeding.' }));
       return;
     }
-
-    try {
-      const payload = {
-        bookingId,
-        firstName: formData.firstName || undefined,
-        lastName: formData.lastName || undefined,
-        email: formData.email || undefined,
-        phone: formData.phone || undefined,
-        language: formData.language || undefined,
-        country: formData.country || undefined,
-        city: formData.city || undefined,
-        address: formData.address || undefined,
-        zip: formData.zip || undefined,
-        companyName: formData.companyName || undefined,
-        companyNumber: formData.companyNumber || undefined,
-        companyNumberType: formData.companyNumberType || undefined,
-        companyType: formData.companyType || undefined,
-      };
-
-      // Check if guest already exists - update instead of create
-      // Only update if we have a valid UUID (not a placeholder)
-      const isValidGuestId = existingGuestId &&
-        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(existingGuestId);
-
-      let finalGuestId = existingGuestId;
-
-      if (isValidGuestId) {
-        console.log('📤 Updating existing booking guest:', existingGuestId, payload);
-        await updateBookingGuest(existingGuestId, {
-          firstName: payload.firstName,
-          lastName: payload.lastName,
-          email: payload.email,
-          phone: payload.phone,
-          language: payload.language,
-          country: payload.country,
-          city: payload.city,
-          address: payload.address,
-          zip: payload.zip,
-          companyName: payload.companyName,
-          companyNumber: payload.companyNumber,
-          companyNumberType: payload.companyNumberType,
-          companyType: payload.companyType,
-        });
-        // Invalidate booking query to refresh data
-        queryClient.invalidateQueries({ queryKey: ['booking', bookingId] });
-        console.log('✅ Booking guest updated successfully');
-      } else {
-        console.log('📤 Creating new booking guest with payload:', payload);
-        const result = await createGuestMutation.mutateAsync(payload);
-        // Store the ID for future updates
-        finalGuestId = result.id;
-        setExistingGuestId(result.id);
-        console.log('✅ Booking guest created successfully:', result.id);
-      }
-
-      // Save to wizard state (include ID)
-      setGuest({
-        ...payload,
-        id: finalGuestId,
-      });
-      markStepCompleted(6);
-      setCurrentStep(7);
-    } catch (error: any) {
-      console.error('❌ Failed to save guest:', error);
-      if (error.response?.data) {
-        console.error('Response status:', error.response.status);
-        console.error('Response data:', error.response.data);
-      }
-      alert(t('bookings.errors.saveGuestFailed', { defaultValue: 'Failed to save guest. Please check console for details.' }));
-    }
+    markStepCompleted(6);
+    setCurrentStep(7);
   };
 
   const handleSkip = () => {
@@ -198,9 +250,13 @@ const GuestForm: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Add/Edit Guest Form */}
       <Card className="p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          {t('bookings.guest.title', { defaultValue: 'Guest Information' })}
+          {editingIndex !== null 
+            ? t('bookings.guest.editGuest', { defaultValue: 'Edit Guest' })
+            : t('bookings.guest.addGuest', { defaultValue: 'Add Guest' })
+          }
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -451,9 +507,104 @@ const GuestForm: React.FC = () => {
             {errors.companyType && <p className="text-red-500 text-xs mt-1">{errors.companyType}</p>}
           </div>
         </div>
+
+        <div className="flex justify-end gap-3 mt-6">
+          {editingIndex !== null && (
+            <Button
+              type="button"
+              onClick={handleCancelEdit}
+              variant="outline"
+            >
+              {t('common.cancel', { defaultValue: 'Cancel' })}
+            </Button>
+          )}
+          <Button
+            type="button"
+            onClick={handleAddGuest}
+            isLoading={createGuestMutation.isPending || updateGuestMutation.isPending}
+            disabled={createGuestMutation.isPending || updateGuestMutation.isPending}
+            variant="outline"
+          >
+            {editingIndex !== null 
+              ? t('bookings.guest.updateGuest', { defaultValue: 'Update Guest' })
+              : t('bookings.guest.addGuest', { defaultValue: '+ Add Guest' })
+            }
+          </Button>
+        </div>
       </Card>
 
-      {/* Navigation */}
+      {/* Added Guests List */}
+      {displayedGuests.length > 0 && (
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            {t('bookings.guest.addedGuests', { defaultValue: 'Added Guests' })} ({displayedGuests.length})
+          </h3>
+          <div className="space-y-3">
+            {displayedGuests.map((guest, index) => (
+              <div 
+                key={index} 
+                className={`p-4 rounded-lg border-2 ${
+                  editingIndex === index 
+                    ? 'bg-blue-50 border-blue-300' 
+                    : 'bg-gray-50 border-gray-200'
+                }`}
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-gray-900">
+                      {t('bookings.messages.guest', { defaultValue: 'Guest' })} {index + 1}: {guest.firstName || ''} {guest.lastName || ''}
+                    </p>
+                    <p className="text-xs text-gray-600 mt-1">
+                      {guest.email && `Email: ${guest.email}`}
+                      {guest.phone && ` • Phone: ${guest.phone}`}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {guest.address && `${guest.address}`}
+                      {guest.city && `, ${guest.city}`}
+                      {guest.zip && ` ${guest.zip}`}
+                      {guest.country && `, ${guest.country}`}
+                    </p>
+                    {guest.companyName && (
+                      <p className="text-xs text-gray-500 mt-1">
+                        {t('bookings.labels.companyName', { defaultValue: 'Company' })}: {guest.companyName}
+                        {guest.companyNumber && ` (${guest.companyNumberType || ''}: ${guest.companyNumber})`}
+                      </p>
+                    )}
+                    {/* Display Guest ID for debugging */}
+                    {((guest as any).id) && (
+                      <p className="text-xs text-blue-600 mt-1 font-mono">
+                        Guest ID: {(guest as any).id}
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex gap-2 ml-4">
+                    <Button
+                      type="button"
+                      onClick={() => handleEditGuest(index)}
+                      variant="outline"
+                      disabled={editingIndex !== null && editingIndex !== index}
+                      className="px-3 py-1.5 text-xs"
+                    >
+                      {t('common.edit', { defaultValue: 'Edit' })}
+                    </Button>
+                    <Button
+                      type="button"
+                      onClick={() => handleDeleteGuest(index)}
+                      variant="outline"
+                      disabled={editingIndex !== null || deleteGuestMutation.isPending}
+                      className="px-3 py-1.5 text-xs text-red-600 hover:text-red-700 hover:bg-red-50 border-red-300"
+                    >
+                      {t('common.delete', { defaultValue: 'Delete' })}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
+
+      {/* Navigation Buttons */}
       <div className="flex justify-between pt-4">
         <Button
           type="button"
@@ -472,11 +623,10 @@ const GuestForm: React.FC = () => {
           </Button>
           <Button
             type="button"
-            onClick={handleSave}
-            isLoading={createGuestMutation.isPending}
-            disabled={createGuestMutation.isPending}
+            onClick={handleNext}
+            disabled={displayedGuests.length === 0}
           >
-            {existingGuestId ? t('common.save', { defaultValue: 'Save' }) : t('common.next', { defaultValue: 'Next' })}
+            {t('common.next', { defaultValue: 'Next' })}
           </Button>
         </div>
       </div>
@@ -485,4 +635,3 @@ const GuestForm: React.FC = () => {
 };
 
 export default GuestForm;
-

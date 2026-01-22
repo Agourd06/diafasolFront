@@ -86,6 +86,7 @@ const BookingsListPage = lazy(() => import("../features/bookings/pages/BookingsL
 const BookingDetailsPage = lazy(() => import("../features/bookings/pages/BookingDetailsPage"));
 const CreateBookingPage = lazy(() => import("../features/bookings/pages/CreateBookingPage"));
 const ContinueBookingPage = lazy(() => import("../features/bookings/pages/ContinueBookingPage"));
+const RoomSearchPage = lazy(() => import("../features/room-search/pages/RoomSearchPage"));
 
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
@@ -111,6 +112,7 @@ const AppRoutes = () => {
           <Route path="/events" element={<EventsListPage />} />
           <Route path="/planning" element={<PlanningPage />} />
           <Route path="/test-event-storage" element={<TestEventStorage />} />
+          <Route path="/room-search" element={<RoomSearchPage />} />
           
           {/* Bookings Routes */}
           <Route path="/bookings" element={<BookingsListPage />} />

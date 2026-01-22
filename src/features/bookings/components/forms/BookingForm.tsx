@@ -4,7 +4,7 @@
  * Main booking information form
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { useCreateBooking } from '../../hooks';
@@ -18,8 +18,16 @@ import type { BookingStatus, CreateBookingPayload } from '../../types';
 
 const BookingForm: React.FC = () => {
   const { t } = useTranslation();
-  const { setBooking, setBookingId, markStepCompleted, setCurrentStep } = useBookingWizard();
+  const { booking, bookingId, setBooking, setBookingId, markStepCompleted, setCurrentStep } = useBookingWizard();
   const createBookingMutation = useCreateBooking();
+
+  // Determine if we should show OTA fields
+  // Logic:
+  // - If editing existing booking: Show OTA fields if bookingType is 'ota' OR if OTA fields exist
+  // - If creating new booking: Always show OTA fields (user can choose to fill them or not)
+  const isOtaBooking = bookingId 
+    ? (booking?.bookingType === 'ota' || (!booking?.bookingType && (booking?.otaReservationCode || booking?.otaName)))
+    : true; // New booking: always show OTA fields by default
 
   // Fetch properties for dropdown
   const { data: propertiesData } = useQuery({
@@ -47,6 +55,59 @@ const BookingForm: React.FC = () => {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Load existing booking data when continuing a booking
+  useEffect(() => {
+    if (booking && bookingId) {
+      console.log('📥 Loading existing booking data into form:', booking);
+      
+      // Check if this is an OTA booking
+      const bookingIsOta = booking.bookingType === 'ota' || 
+        (!booking.bookingType && (booking.otaReservationCode || booking.otaName));
+      
+      // Format dates for HTML date inputs (YYYY-MM-DD)
+      const formatDateForInput = (dateString: string | undefined): string => {
+        if (!dateString) return '';
+        // If date is already in YYYY-MM-DD format, return as is
+        if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+          return dateString;
+        }
+        // If date includes time (ISO format), extract just the date part
+        if (dateString.includes('T')) {
+          return dateString.split('T')[0];
+        }
+        // Try to parse and format
+        try {
+          const date = new Date(dateString);
+          if (!isNaN(date.getTime())) {
+            return date.toISOString().split('T')[0];
+          }
+        } catch (e) {
+          console.warn('Failed to parse date:', dateString);
+        }
+        return dateString;
+      };
+      
+      setFormData({
+        propertyId: booking.propertyId || '',
+        status: (booking.status as BookingStatus) || 'new',
+        arrivalDate: formatDateForInput(booking.arrivalDate),
+        departureDate: formatDateForInput(booking.departureDate),
+        amount: booking.amount || '',
+        uniqueId: booking.uniqueId || '',
+        // Only load OTA fields if this is an OTA booking
+        otaReservationCode: bookingIsOta ? (booking.otaReservationCode || '') : '',
+        otaName: bookingIsOta ? (booking.otaName || '') : '',
+        arrivalHour: booking.arrivalHour || '',
+        otaCommission: bookingIsOta ? (booking.otaCommission || '') : '',
+        currency: booking.currency || 'EUR',
+        notes: booking.notes || '',
+        adultsCount: booking.occupancy?.adults || 2,
+        childrenCount: booking.occupancy?.children || 0,
+        infantsCount: booking.occupancy?.infants || 0,
+      });
+    }
+  }, [booking, bookingId]);
+
   const validate = (): boolean => {
     const validationErrors = validateBookingForm(formData);
     setErrors(validationErrors);
@@ -70,23 +131,27 @@ const BookingForm: React.FC = () => {
         departureDate: formData.departureDate,
         amount: parseFloat(formData.amount).toFixed(2), // String format: "220.00" as per API spec
         currency: formData.currency || 'EUR', // ISO 4217 code, default to EUR
+        // Set bookingType based on whether OTA fields are filled
+        // If OTA fields are filled → 'ota', otherwise → 'internal'
+        bookingType: (formData.otaReservationCode?.trim() || formData.otaName?.trim()) ? 'ota' : 'internal',
       };
 
       // Add optional fields only if they have non-empty values
       if (formData.uniqueId?.trim()) {
         payload.uniqueId = formData.uniqueId.trim();
       }
+      // Include OTA fields if they are filled (user chose to fill them)
       if (formData.otaReservationCode?.trim()) {
         payload.otaReservationCode = formData.otaReservationCode.trim();
       }
       if (formData.otaName?.trim()) {
         payload.otaName = formData.otaName.trim();
       }
-      if (formData.arrivalHour?.trim()) {
-        payload.arrivalHour = formData.arrivalHour.trim();
-      }
       if (formData.otaCommission?.trim()) {
         payload.otaCommission = formData.otaCommission.trim();
+      }
+      if (formData.arrivalHour?.trim()) {
+        payload.arrivalHour = formData.arrivalHour.trim();
       }
       if (formData.notes?.trim()) {
         payload.notes = formData.notes.trim();
@@ -296,39 +361,43 @@ const BookingForm: React.FC = () => {
             <p className="text-xs text-gray-500 mt-1">{t('bookings.helpers.uniqueIdFormat', { defaultValue: 'Format: ABC-123456 (e.g., BDC-1556013801)' })}</p>
           </div>
 
-          {/* OTA Reservation Code */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">
-              {t('bookings.form.otaReservationCode', { defaultValue: 'OTA Reservation Code' })}
-            </label>
-            <input
-              type="text"
-              name="otaReservationCode"
-              value={formData.otaReservationCode}
-              onChange={handleChange}
-              placeholder="1556013801"
-              className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
-                errors.otaReservationCode ? 'border-red-500 bg-red-50' : 'border-gray-300'
-              }`}
-            />
-            {errors.otaReservationCode && <p className="text-red-500 text-xs mt-1">{errors.otaReservationCode}</p>}
-            <p className="text-xs text-gray-500 mt-1">{t('bookings.helpers.otaReservationCodeFormat', { defaultValue: 'Numbers only' })}</p>
-          </div>
+          {/* OTA Reservation Code - Only show for OTA bookings */}
+          {isOtaBooking && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                {t('bookings.form.otaReservationCode', { defaultValue: 'OTA Reservation Code' })}
+              </label>
+              <input
+                type="text"
+                name="otaReservationCode"
+                value={formData.otaReservationCode}
+                onChange={handleChange}
+                placeholder="1556013801"
+                className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                  errors.otaReservationCode ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                }`}
+              />
+              {errors.otaReservationCode && <p className="text-red-500 text-xs mt-1">{errors.otaReservationCode}</p>}
+              <p className="text-xs text-gray-500 mt-1">{t('bookings.helpers.otaReservationCodeFormat', { defaultValue: 'Numbers only' })}</p>
+            </div>
+          )}
 
-          {/* OTA Name */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">
-              {t('bookings.form.otaName', { defaultValue: 'OTA Name' })}
-            </label>
-            <input
-              type="text"
-              name="otaName"
-              value={formData.otaName}
-              onChange={handleChange}
-              placeholder={t('bookings.placeholders.otaName', { defaultValue: 'Booking.com' })}
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
+          {/* OTA Name - Only show for OTA bookings */}
+          {isOtaBooking && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                {t('bookings.form.otaName', { defaultValue: 'OTA Name' })}
+              </label>
+              <input
+                type="text"
+                name="otaName"
+                value={formData.otaName}
+                onChange={handleChange}
+                placeholder={t('bookings.placeholders.otaName', { defaultValue: 'Booking.com' })}
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+          )}
 
           {/* Arrival Hour */}
           <div>
@@ -344,24 +413,26 @@ const BookingForm: React.FC = () => {
             />
           </div>
 
-          {/* OTA Commission */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">
-              {t('bookings.form.otaCommission', { defaultValue: 'OTA Commission' })}
-            </label>
-            <input
-              type="text"
-              name="otaCommission"
-              value={formData.otaCommission}
-              onChange={handleChange}
-              placeholder="10.00"
-              className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
-                errors.otaCommission ? 'border-red-500 bg-red-50' : 'border-gray-300'
-              }`}
-            />
-            {errors.otaCommission && <p className="text-red-500 text-xs mt-1">{errors.otaCommission}</p>}
-            <p className="text-xs text-gray-500 mt-1">{t('bookings.helpers.otaCommissionFormat', { defaultValue: 'Enter a positive number with up to 2 decimal places' })}</p>
-          </div>
+          {/* OTA Commission - Only show for OTA bookings */}
+          {isOtaBooking && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                {t('bookings.form.otaCommission', { defaultValue: 'OTA Commission' })}
+              </label>
+              <input
+                type="text"
+                name="otaCommission"
+                value={formData.otaCommission}
+                onChange={handleChange}
+                placeholder="10.00"
+                className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                  errors.otaCommission ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                }`}
+              />
+              {errors.otaCommission && <p className="text-red-500 text-xs mt-1">{errors.otaCommission}</p>}
+              <p className="text-xs text-gray-500 mt-1">{t('bookings.helpers.otaCommissionFormat', { defaultValue: 'Enter a positive number with up to 2 decimal places' })}</p>
+            </div>
+          )}
 
           {/* Occupancy */}
           <div className="md:col-span-2">

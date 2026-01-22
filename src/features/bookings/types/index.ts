@@ -22,6 +22,8 @@ export type RevisionStatus = 'new' | 'modified' | 'cancelled';
 
 export type CardType = 'visa' | 'mastercard' | 'amex' | 'discover' | 'other';
 
+export type BookingType = 'internal' | 'ota';
+
 export const BOOKING_STATUSES: BookingStatus[] = [
   'new',
   'pending',
@@ -60,6 +62,7 @@ export interface Booking {
   arrivalDate: string; // YYYY-MM-DD
   departureDate: string; // YYYY-MM-DD
   amount: string; // "220.00"
+  bookingType?: BookingType | null; // 'internal' for direct bookings, 'ota' for OTA bookings
   uniqueId?: string | null;
   otaReservationCode?: string | null;
   otaName?: string | null;
@@ -80,6 +83,7 @@ export interface CreateBookingPayload {
   arrivalDate: string;
   departureDate: string;
   amount: string; // String format: "220.00"
+  bookingType?: BookingType; // 'internal' for direct bookings, 'ota' for OTA bookings
   uniqueId?: string;
   otaReservationCode?: string;
   otaName?: string;
@@ -103,7 +107,7 @@ export interface BookingRoom {
   companyId: string;
   bookingId: string;
   roomTypeId: string;
-  ratePlanId: string;
+  ratePlanId: string | null; // Can be null for direct bookings (rate plan added later)
   checkinDate: string; // YYYY-MM-DD
   checkoutDate: string; // YYYY-MM-DD
   adults: number;
@@ -331,7 +335,7 @@ export interface BookingWizardState {
   roomDays: { roomTempId: string; days: CreateBookingRoomDayPayload[] }[];
   services: CreateBookingServicePayload[];
   guarantee: CreateBookingGuaranteePayload | null;
-  guest: CreateBookingGuestPayload | null;
+  guests: CreateBookingGuestPayload[]; // Changed from guest (singular) to guests (array)
   revision: Omit<CreateBookingRevisionPayload, 'bookingId'> | null;
 }
 

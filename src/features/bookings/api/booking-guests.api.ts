@@ -72,6 +72,26 @@ export const updateBookingGuest = async (id: string, payload: UpdateBookingGuest
 };
 
 /**
+ * Get all guests for a booking
+ */
+export const getBookingGuestsByBookingId = async (bookingId: string): Promise<BookingGuest[]> => {
+  try {
+    console.log('📥 Fetching guests for booking:', bookingId);
+    const response = await axiosClient.get<BookingGuest[]>(`${BASE_URL}/booking/${bookingId}`);
+    console.log('✅ Fetched guests:', response.data.length);
+    return response.data;
+  } catch (error: any) {
+    console.error('❌ Error fetching booking guests:', error);
+    // If endpoint doesn't exist, return empty array (backward compatibility)
+    if (error.response?.status === 404) {
+      console.warn('⚠️ Get guests by booking endpoint not available, returning empty array');
+      return [];
+    }
+    throw error;
+  }
+};
+
+/**
  * Delete a booking guest
  */
 export const deleteBookingGuest = async (id: string): Promise<void> => {

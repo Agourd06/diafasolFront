@@ -20,7 +20,10 @@ interface BookingWizardContextValue extends BookingWizardState {
   addService: (service: BookingWizardState['services'][0]) => void;
   removeService: (index: number) => void;
   setGuarantee: (guarantee: BookingWizardState['guarantee']) => void;
-  setGuest: (guest: BookingWizardState['guest']) => void;
+  addGuest: (guest: BookingWizardState['guests'][0]) => void;
+  updateGuest: (index: number, guest: BookingWizardState['guests'][0]) => void;
+  removeGuest: (index: number) => void;
+  setGuest: (guest: BookingWizardState['guests'][0] | null) => void; // Keep for backward compatibility
   setRevision: (revision: BookingWizardState['revision']) => void;
   resetWizard: () => void;
   loadExistingBooking: (bookingData: any) => void;
@@ -39,7 +42,7 @@ const initialState: BookingWizardState = {
   roomDays: [],
   services: [],
   guarantee: null,
-  guest: null,
+  guests: [], // Changed from guest: null to guests: []
   revision: null,
 };
 
@@ -113,8 +116,28 @@ export const BookingWizardProvider: React.FC<{ children: ReactNode }> = ({ child
     setState((prev) => ({ ...prev, guarantee }));
   };
 
-  const setGuest = (guest: BookingWizardState['guest']) => {
-    setState((prev) => ({ ...prev, guest }));
+  const addGuest = (guest: BookingWizardState['guests'][0]) => {
+    setState((prev) => ({ ...prev, guests: [...prev.guests, guest] }));
+  };
+
+  const updateGuest = (index: number, guest: BookingWizardState['guests'][0]) => {
+    setState((prev) => {
+      const newGuests = [...prev.guests];
+      newGuests[index] = guest;
+      return { ...prev, guests: newGuests };
+    });
+  };
+
+  const removeGuest = (index: number) => {
+    setState((prev) => ({
+      ...prev,
+      guests: prev.guests.filter((_, i) => i !== index),
+    }));
+  };
+
+  // Keep setGuest for backward compatibility (sets first guest or clears all)
+  const setGuest = (guest: BookingWizardState['guests'][0] | null) => {
+    setState((prev) => ({ ...prev, guests: guest ? [guest] : [] }));
   };
 
   const setRevision = (revision: BookingWizardState['revision']) => {
@@ -237,25 +260,25 @@ export const BookingWizardProvider: React.FC<{ children: ReactNode }> = ({ child
       currentStep = 6;
     }
 
-    // Step 6: Load guest
-    const guest = bookingData.guests?.[0] ? {
+    // Step 6: Load guests (all guests, not just first one)
+    const guests = bookingData.guests?.map((g: any) => ({
       bookingId: bookingData.id,
-      name: bookingData.guests[0].name,
-      surname: bookingData.guests[0].surname,
-      mail: bookingData.guests[0].mail,
-      phone: bookingData.guests[0].phone,
-      address: bookingData.guests[0].address,
-      city: bookingData.guests[0].city,
-      zip: bookingData.guests[0].zip,
-      country: bookingData.guests[0].country,
-      language: bookingData.guests[0].language,
-      companyTitle: bookingData.guests[0].companyTitle,
-      companyNumber: bookingData.guests[0].companyNumber,
-      companyNumberType: bookingData.guests[0].companyNumberType,
-      companyType: bookingData.guests[0].companyType,
-    } : null;
+      firstName: g.firstName || g.name || undefined,
+      lastName: g.lastName || g.surname || undefined,
+      email: g.email || g.mail || undefined,
+      phone: g.phone || undefined,
+      address: g.address || undefined,
+      city: g.city || undefined,
+      zip: g.zip || undefined,
+      country: g.country || undefined,
+      language: g.language || undefined,
+      companyName: g.companyName || g.companyTitle || undefined,
+      companyNumber: g.companyNumber || undefined,
+      companyNumberType: g.companyNumberType || undefined,
+      companyType: g.companyType || undefined,
+    })) || [];
 
-    if (guest) {
+    if (guests.length > 0) {
       completedSteps.push(6);
       currentStep = 7;
     }
@@ -272,6 +295,7 @@ export const BookingWizardProvider: React.FC<{ children: ReactNode }> = ({ child
         departureDate: bookingData.departureDate,
         amount: bookingData.amount,
         currency: bookingData.currency,
+        bookingType: bookingData.bookingType || (bookingData.otaReservationCode || bookingData.otaName ? 'ota' : 'internal'),
         uniqueId: bookingData.uniqueId,
         otaReservationCode: bookingData.otaReservationCode,
         otaName: bookingData.otaName,
@@ -285,7 +309,7 @@ export const BookingWizardProvider: React.FC<{ children: ReactNode }> = ({ child
       roomDays,
       services,
       guarantee,
-      guest,
+      guests,
       revision: null,
     });
 
@@ -323,7 +347,10 @@ export const BookingWizardProvider: React.FC<{ children: ReactNode }> = ({ child
     addService,
     removeService,
     setGuarantee,
-    setGuest,
+    addGuest,
+    updateGuest,
+    removeGuest,
+    setGuest, // Keep for backward compatibility
     setRevision,
     resetWizard,
     loadExistingBooking,

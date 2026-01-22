@@ -2070,7 +2070,11 @@
       "title": "Garantie de paiement"
     },
     "guest": {
-      "title": "Informations client"
+      "title": "Informations client",
+      "addGuest": "+ Ajouter un client",
+      "editGuest": "Modifier le client",
+      "updateGuest": "Mettre à jour le client",
+      "addedGuests": "Clients ajoutés"
     },
     "review": {
       "bookingInfo": "Informations de réservation",
@@ -2212,11 +2216,14 @@
       "roomIdMissing": "Erreur : Impossible d'enregistrer les jours de chambre. L'ID de la chambre est manquant pour la Chambre {{roomNumber}}.\n\nVeuillez vous assurer que la chambre est enregistrée d'abord.",
       "saveGuaranteeFailed": "Échec de l'enregistrement de la garantie. {{message}}",
       "saveGuestFailed": "Échec de l'enregistrement du client. Veuillez vérifier la console pour plus de détails.",
+      "cannotUpdateGuest": "Erreur : Impossible de mettre à jour le client. L'ID du client est manquant.",
+      "atLeastOneGuest": "Veuillez ajouter au moins un client avant de continuer.",
       "cardHolderNameRequired": "Le nom du titulaire de la carte est requis",
       "maskedCardNumberInvalid": "Format invalide (ex: 411111******1111)"
     },
     "alerts": {
       "deleteRoom": "Êtes-vous sûr de vouloir supprimer cette chambre ?",
+      "deleteGuest": "Êtes-vous sûr de vouloir supprimer ce client ?",
       "roomDaysAlreadyConfigured": "La Chambre {{roomNumber}} a déjà {{count}} jour(s) configuré(s).\n\nVoulez-vous ajouter des jours supplémentaires ? Cela créera des entrées en double."
     },
     "messages": {
@@ -2229,6 +2236,7 @@
       "noRoomsAdded": "Aucune chambre ajoutée pour le moment. Veuillez revenir en arrière et ajouter des chambres d'abord.",
       "backToRooms": "Retour aux chambres",
       "room": "Chambre",
+      "guest": "Client",
       "of": "sur",
       "dailyPricing": "Tarification quotidienne",
       "daysAlreadyConfigured": "✓ {{count}} jour(s) déjà configuré(s) pour cette chambre",
@@ -2253,7 +2261,66 @@
       "checkin": "Arrivée",
       "checkout": "Départ",
       "otaUniqueId": "ID unique OTA",
-      "cardType": "Type de carte"
+      "cardType": "Type de carte",
+      "noRatePlan": "Aucun plan tarifaire assigné"
+    }
+  },
+  "roomSearch": {
+    "title": "Rechercher des chambres disponibles",
+    "subtitle": "Trouvez la chambre parfaite pour votre séjour",
+    "form": {
+      "title": "Critères de recherche",
+      "startDate": "Date de début",
+      "endDate": "Date de fin",
+      "numberOfRooms": "Nombre de chambres",
+      "companions": "Accompagnants",
+      "adults": "Adultes",
+      "adultsDescription": "18+ ans",
+      "children": "Enfants",
+      "childrenDescription": "2-17 ans",
+      "infants": "Bébés",
+      "infantsDescription": "Moins de 2 ans",
+      "searchButton": "Rechercher des chambres"
+    },
+    "results": {
+      "title": "Chambres disponibles",
+      "error": "Erreur lors du chargement des chambres",
+      "noSearch": "Entrez les critères de recherche",
+      "noSearchDescription": "Veuillez remplir le formulaire de recherche pour trouver des chambres disponibles.",
+      "noProperty": "Aucune propriété sélectionnée",
+      "noPropertyDescription": "Veuillez d'abord sélectionner une propriété pour rechercher des chambres disponibles.",
+      "noRooms": "Aucune chambre disponible",
+      "noRoomsDescription": "Veuillez ajuster vos critères de recherche ou essayer d'autres dates.",
+      "count": "{{count}} chambre(s) trouvée(s)",
+      "selected": "sélectionnée(s)"
+    },
+    "room": {
+      "occupancy": "Occupation",
+      "adults": "Adultes",
+      "children": "Enfants",
+      "infants": "Bébés",
+      "capacity": "Capacité",
+      "availableRooms": "Disponibles",
+      "roomKind": "Type de chambre",
+      "photos": "photos"
+    },
+    "booking": {
+      "created": "Réservation créée avec succès !",
+      "error": "Échec de la création de la réservation",
+      "noRoomsSelected": "Veuillez sélectionner au moins une chambre",
+      "roomCountMismatch": "Veuillez sélectionner exactement {{count}} chambre(s)",
+      "noProperty": "Veuillez d'abord sélectionner une propriété pour créer une réservation.",
+      "differentProperty": "Toutes les chambres doivent provenir de la même propriété. Veuillez sélectionner des chambres de {{property}}.",
+      "invalidRoomTypes": "Certains types de chambres sélectionnés ne sont plus disponibles. Veuillez actualiser et réessayer.",
+      "summary": "Chambres sélectionnées",
+      "total": "Total",
+      "room": "chambre",
+      "rooms": "chambres",
+      "selected": "sélectionnée(s)",
+      "selectRooms": "Sélectionner des chambres",
+      "createButton": "Créer la réservation",
+      "creating": "Création de la réservation...",
+      "selectAllRooms": "Veuillez sélectionner {{count}} chambre(s) pour continuer"
     }
   }
 }
