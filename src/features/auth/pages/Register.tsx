@@ -82,45 +82,14 @@ const Register: React.FC = () => {
       </div>
 
       <div className="relative flex min-h-screen">
-        {/* Left side - Hero */}
+        {/* Left side - Logo only */}
         <div className="hidden w-1/2 items-center justify-center p-12 lg:flex">
-          <div className="max-w-xl animate-fade-in">
-            <div className="mb-8 inline-flex items-center gap-2 rounded-2xl bg-white/80 px-4 py-2 shadow-lg backdrop-blur-sm">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-brand-500 to-indigo-600" />
-              <span className="text-xl font-bold text-slate-900">DiafaSol</span>
-            </div>
-
-            <h1 className="mb-6 text-5xl font-bold leading-tight text-slate-900">
-              {t("auth.register.heroTitle")}
-              <span className="mt-2 block bg-gradient-to-r from-brand-600 to-indigo-600 bg-clip-text text-transparent">
-                {t("auth.register.heroSubtitle")}
-              </span>
-            </h1>
-
-            <p className="mb-8 text-lg text-slate-600">
-              {t("auth.register.heroDescription")}
-            </p>
-
-            {/* Benefits */}
-            <div className="space-y-4">
-              {[
-                { icon: "⚡", title: t("auth.register.benefits.quickSetup"), desc: t("auth.register.benefits.quickSetupDesc") },
-                { icon: "🔒", title: t("auth.register.benefits.security"), desc: t("auth.register.benefits.securityDesc") },
-                { icon: "🏢", title: t("auth.register.benefits.multiTenant"), desc: t("auth.register.benefits.multiTenantDesc") },
-                { icon: "💼", title: t("auth.register.benefits.support"), desc: t("auth.register.benefits.supportDesc") }
-              ].map((benefit, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center gap-4 rounded-xl bg-white/60 p-4 backdrop-blur-sm transition-transform hover:scale-105"
-                >
-                  <div className="text-3xl">{benefit.icon}</div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900">{benefit.title}</h3>
-                    <p className="text-sm text-slate-600">{benefit.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="flex items-center justify-center animate-fade-in">
+            <img 
+              src="/diafasol_logo.png" 
+              alt="DiafaSol" 
+              className="h-32 w-auto object-contain drop-shadow-2xl"
+            />
           </div>
         </div>
 
@@ -128,9 +97,12 @@ const Register: React.FC = () => {
         <div className="flex w-full items-center justify-center p-6 lg:w-1/2 lg:p-12">
           <div className="w-full max-w-xl animate-slide-up">
             {/* Mobile logo */}
-            <div className="mb-6 flex items-center justify-center gap-2 lg:hidden">
-              <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand-500 to-indigo-600" />
-              <span className="text-2xl font-bold text-slate-900">DiafaSol</span>
+            <div className="mb-6 flex items-center justify-center lg:hidden">
+              <img 
+                src="/diafasol_logo.png" 
+                alt="DiafaSol" 
+                className="h-14 w-auto object-contain"
+              />
             </div>
 
             <div className="rounded-3xl bg-white/80 p-8 shadow-2xl backdrop-blur-xl ring-1 ring-slate-200/50">

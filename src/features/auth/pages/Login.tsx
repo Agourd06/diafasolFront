@@ -32,46 +32,14 @@ const Login: React.FC = () => {
       </div>
 
       <div className="relative flex min-h-screen">
-        {/* Left side - Hero section */}
+        {/* Left side - Logo only */}
         <div className="hidden w-1/2 items-center justify-center p-12 lg:flex">
-          <div className="max-w-xl animate-fade-in">
-            {/* Logo/Brand */}
-            <div className="mb-8 inline-flex items-center gap-2 rounded-2xl bg-white/80 px-4 py-2 shadow-lg backdrop-blur-sm">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-brand-500 to-indigo-600" />
-              <span className="text-xl font-bold text-slate-900">DiafaSol</span>
-            </div>
-
-            <h1 className="mb-6 text-5xl font-bold leading-tight text-slate-900">
-              {t("auth.login.heroTitle")}
-              <span className="mt-2 block bg-gradient-to-r from-brand-600 to-indigo-600 bg-clip-text text-transparent">
-                {t("auth.login.heroSubtitle")}
-              </span>
-            </h1>
-
-            <p className="mb-8 text-lg text-slate-600">
-              {t("auth.login.heroDescription")}
-            </p>
-
-            {/* Features */}
-            <div className="space-y-4">
-              {[
-                { icon: "🏢", title: t("auth.login.features.multiCompany"), desc: t("auth.login.features.multiCompanyDesc") },
-                { icon: "👥", title: t("auth.login.features.centralAdmin"), desc: t("auth.login.features.centralAdminDesc") },
-                { icon: "📊", title: t("auth.login.features.monitoring"), desc: t("auth.login.features.monitoringDesc") }
-              ].map((feature, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-start gap-4 rounded-xl bg-white/60 p-4 backdrop-blur-sm transition-transform hover:scale-105"
-                  style={{ animationDelay: `${idx * 0.2}s` }}
-                >
-                  <div className="text-3xl">{feature.icon}</div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900">{feature.title}</h3>
-                    <p className="text-sm text-slate-600">{feature.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="flex items-center justify-center animate-fade-in">
+            <img 
+              src="/diafasol_logo.png" 
+              alt="DiafaSol" 
+              className="h-32 w-auto object-contain drop-shadow-2xl"
+            />
           </div>
         </div>
 
@@ -79,9 +47,12 @@ const Login: React.FC = () => {
         <div className="flex w-full items-center justify-center p-6 lg:w-1/2 lg:p-12">
           <div className="w-full max-w-md animate-slide-up">
             {/* Mobile logo */}
-            <div className="mb-8 flex items-center justify-center gap-2 lg:hidden">
-              <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand-500 to-indigo-600" />
-              <span className="text-2xl font-bold text-slate-900">DiafaSol</span>
+            <div className="mb-8 flex items-center justify-center lg:hidden">
+              <img 
+                src="/diafasol_logo.png" 
+                alt="DiafaSol" 
+                className="h-14 w-auto object-contain"
+              />
             </div>
 
             <div className="rounded-3xl bg-white/80 p-8 shadow-2xl backdrop-blur-xl ring-1 ring-slate-200/50">

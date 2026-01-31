@@ -82,9 +82,9 @@ const DashboardLayout: React.FC = () => {
 
       {/* Main Content */}
       <main
-        className={`min-h-screen pt-28 transition-all duration-300 ${
-          sidebarOpen ? "lg:pl-64" : "lg:pl-0"
-        }`}
+        className={`min-h-screen transition-all duration-300 ${
+          hideContextHeader ? "pt-20" : "pt-24"
+        } ${sidebarOpen ? "lg:pl-64" : "lg:pl-0"}`}
       >
         <div className="p-6">
           <Outlet />
